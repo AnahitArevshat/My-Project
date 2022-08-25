@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import moment from 'moment';
 import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
@@ -8,13 +8,14 @@ import ButtonGroupForBook from '../butonGroup/ButtonGroupForBook';
 import Button from "../button/button";
 import Clos from '../../assets/clos.svg';
 import TimePicker from '../timePicker/timePicke';
-import CalendarForBooks from '../CalendarForBooks/CalendarForBooks';
+import CalendarVacation from '../CalendarVacation/CalendarVacation';
 import Greate from '../../assets/greate.svg';
 import InputTasck from "../input/inputTasck";
 
 const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation}) => {
   let dayNow=new Date();
   let currentDay=moment(dayNow).format('MMMM DD');
+  const [desc, setDesc]=useState('');
 
   const [numBook, setNumBook]=useState({
     numType:'',
@@ -22,11 +23,13 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
     numTime:'',
     numDuration:'',
   } );
+  const height = Dimensions.get("window").height;
+
   // ref
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ['100%', '80%'], []);
+  const snapPoints = useMemo(() => ['100%', '100%'], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -59,6 +62,11 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
     setMod(false);
   }
 
+  const createVacatin=()=>{
+     setInd(4);
+    setMod(false);
+  }
+
   const pressTypeOfBook=(el)=>{
      if(numBook.numType===0){
     HandleClick(el, numBook.numType);
@@ -71,9 +79,6 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
 
       else
        HandleClick(el, numBook.numType);
-
-
-    console.log(numBook.numType);
     }
 
   switch(ind){
@@ -111,6 +116,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
 
     case 2:
       return (
+
         <BottomSheet
           ref={bottomSheetRef}
           index={1}
@@ -124,25 +130,25 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
               <TouchableOpacity onPress={handleClosePress}>
                 <Clos style={{marginLeft:350}}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'94%'}}>
+              <View style={{width:'100%', height:height}}>
                 <View style={{marginLeft:35}}>
                 <Text style={styles.txt}>Hourly leave</Text>
                 </View>
                 <View style={{marginLeft:35, marginTop:20}}>
                 <Text style={styles.txt2}>{currentDay}</Text>
                 </View>
-                <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop:20}}>
+                <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop:5}}>
                 <TimePicker/>
 
-                <View  style={{flex:1, alignItems:'center', justifyContent:'space-between', marginTop:35}}>
+                <View  style={{flex:1, alignItems:'center', justifyContent:'space-between', marginTop:30}}>
                   <ButtonGroupForBook
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day',]}
                     doSomthingAfterClick={printButtonLable}/>
                 </View>
                 <View style={styles.mult}>
-                  <InputTasck name='Description'multiline/>
+                  <InputTasck name='Description'multiline onChangeText={(text)=>setDesc(text)}/>
                  </View>
-                <View style={{alignItems:'center', marginBottom:35, marginTop:-35}}>
+                <View style={{alignItems:'center', marginBottom:340, marginTop:-35}}>
                   <Button title='Book'onPress={(el)=>HandleClick(el, numBook.numType)}/>
                 </View>
               </View>
@@ -172,12 +178,12 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
                 <View style={{marginLeft:35}}>
                   <Text style={styles.txt}>Vacation</Text>
                 </View>
-                <CalendarForBooks/>
+                <CalendarVacation/>
                 <View style={styles.multil}>
                   <InputTasck name='Description'multiline/>
                 </View>
                   <View style={{alignItems:'center'}}>
-                    <Button title='Book'onPress={(el)=>HandleClick(el, numBook.numType)}/>
+                    <Button title='Book'onPress={createVacatin}/>
                   </View>
                 </View>
               </View>
@@ -186,10 +192,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
       );
       break;
 
-
-
-
-    case 8:
+    case 4:
       return (  <BottomSheet
           ref={bottomSheetRef}
           index={1}
@@ -203,10 +206,10 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
               <TouchableOpacity onPress={greatClosePress}>
                 <Clos style={{marginLeft:350}}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'80%', alignItems:'center'}}>
+              <View style={{width:'100%', height:'70%', alignItems:'center'}}>
                 <Greate style={{marginTop:50}}/>
                 <Text style={[styles.txt, {marginTop:50}]}>Greate!</Text>
-                <Text style={{marginTop:50}}>Event successfully created!</Text>
+                <Text style={{marginTop:50}}>Time successfully booked!</Text>
               </View>
             </View>
           </BottomSheetView>
@@ -251,7 +254,7 @@ const styles = StyleSheet.create({
     color: '#11493E',
   },
 
-  mult:{width:340, height: 91, borderWidth:1,borderColor: '#E3E3E3', borderRadius:6, marginBottom:35},
+  mult:{width:340, height: 91, borderWidth:1,borderColor: '#E3E3E3', borderRadius:6, marginBottom:30},
   multil:{width:320, height: 91, borderWidth:1,borderColor: '#E3E3E3', borderRadius:6, marginTop:30, marginBottom:-15, marginLeft:45}
 
 });

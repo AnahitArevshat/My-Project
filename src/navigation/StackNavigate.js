@@ -31,18 +31,7 @@ export default function Navigate() {
           component={TabScreens}
           options={{ title: "Bottom_Navigation" }}
         />
-        {
-        }
-        <Stack.Screen
-          name="CreateTasks"
-          component={CreateTasks}
-          options={{ title: "Create_Tasks" }}
-        />
-        <Stack.Screen
-          name="CreateEvent"
-          component={CreateEvents}
-          options={{ title: "Create_Events" }}
-        />
+
       </Stack.Navigator>
 
       </NavigationContainer>

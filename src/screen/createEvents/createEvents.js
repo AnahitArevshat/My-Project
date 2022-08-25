@@ -1,8 +1,8 @@
-import React, { useState, useRef, useMemo, useCallback } from "react";
+import React, { useState } from "react";
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from "react-redux";
 import {
-  Text, View, Image, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Modal, Pressable
+  Text, View, Image, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Keyboard
 } from "react-native";
 import {Formik} from 'formik';
 import CalendarImage from "../../assets/calendarImage.svg";
@@ -16,7 +16,7 @@ import {eventParticip, eventSubParticip} from '../../items/eventParticip';
 import {eventRoom} from '../../items/eventRoom';
 import {durat} from '../../items/durat';
 import {addEventsAction} from '../../eventsReducer/eventsReducer';
-
+import HideTabBar from '../../functions/hideTabBar';
 
 const CreateEvents=({navigation})=> {
 
@@ -38,6 +38,9 @@ const CreateEvents=({navigation})=> {
   const hamar=useSelector((state)=>state.events.hamar);
 
   const dispatch=useDispatch();
+
+  HideTabBar(navigation);
+
 
   const doSomething=(value)=>{
     switch(ind){
@@ -162,7 +165,8 @@ const CreateEvents=({navigation})=> {
               <TextInput placeholder='Event Title*'
                  value={props.values.title}
                  name='EventsTitle'
-                 onChangeText={props.handleChange('title')}/>
+                 onChangeText={props.handleChange('title')}
+               />
             </View>
           </View>
           <TouchableOpacity onPress={clickOrgnizer} style={styles.emailContainer}>
@@ -232,7 +236,12 @@ const CreateEvents=({navigation})=> {
             </TouchableOpacity>
           </TouchableOpacity>
           <View style={styles.mult}>
-            <TextInput  placeholder='Description' value={props.values.descript} name='Description'multiline onChangeText={props.handleChange('descript')}/>
+            <TextInput
+              placeholder='Description'
+              value={props.values.descript}
+              name='Description'multiline
+              onChangeText={props.handleChange('descript')}
+             />
           </View>
           <View>
             <Button title='Create' onPress={props.handleSubmit}/>
@@ -244,12 +253,11 @@ const CreateEvents=({navigation})=> {
     </Formik>
       {mod ? navigation.setOptions({
         tabBarStyle: { display: "none" },
-      })
+        },)
         :
         navigation.setOptions({
           tabBarStyle: { display: "flex" },
-          keyboardHidesTabBar: true
-        })
+       })
       }
       {mod && <BottomSheetWindow navigation={navigation} mod={mod} setMod={setMod} ind={ind} doSomething={doSomething}/>}
       </>

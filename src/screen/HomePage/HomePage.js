@@ -17,6 +17,7 @@ const HomePage = ({navigation, route}) => {
 
   const task=useSelector(state=>state.tasks);
   const event=useSelector(state=>state.events);
+  const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
 
   let dat = new Date();
 
@@ -53,6 +54,7 @@ const HomePage = ({navigation, route}) => {
       <Image
         style={{width: 315, height: 145, marginBottom: 15}}
         source={require('../../image/Frame736.png')}
+
       />
       <View style={homeStyle.navigItem}>
         <ButtonGroup
@@ -70,7 +72,9 @@ const HomePage = ({navigation, route}) => {
           {showCalendar ? <CalendarImageOff/> : <CalendarImage/>}
         </TouchableOpacity>
       </View>
-      {showCalendar && <Calendar style={{width:316, marginTop:15}}/>}
+      {showCalendar && <Calendar style={{width:316, marginTop:15}}
+                                 markedDates={{[curDay]:  {selected: true, selectedColor: '#347474'}}}
+                                 />}
       {num===0 && <TaskComp  el={task.tasks} navigation={navigation}/>}
       {num===1 && <EventComp el={event.events} />}
       {num===2 && <View><TaskComp/><EventComp/></View>}

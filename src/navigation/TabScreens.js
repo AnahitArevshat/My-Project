@@ -10,6 +10,7 @@ import CreateEvents from '../screen/createEvents/createEvents';
 import BookLeave from '../screen/bookLeave/bookLeave';
 import Middle from '../screen/middle/middle';
 import DelUpdTasks from "../screen/createTasks/delUpdTasks";
+import Notifications from "../screen/notifications/notification";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +29,8 @@ function TabScreens() {
         component={HomePage}
        />
         <Tab.Screen
-        name="One"
-        component={One}
+        name="Notificat"
+        component={Notifications}
         />
       <Tab.Screen
         name="tow"

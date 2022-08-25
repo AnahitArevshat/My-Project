@@ -24,7 +24,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
   const focusedOptions = descriptors[state.routes[state.index].key].options;
     if (focusedOptions?.tabBarStyle?.display === "none") {
-    return null;
+          return null;
   }
 
     const pol1=()=>{
@@ -48,10 +48,11 @@ function MyTabBar({ state, descriptors, navigation }) {
       <TouchableOpacity onPress={() => setShowItem(!showItem)}>
         {showItem ?
           (
-            <PoligonPress style={{ position: "absolute", bottom: -30, left: 120 }} />
+            <Poligon style={{ position: "absolute", bottom: -30, left: 120 }} />
 
           )
-          : <Poligon style={{ position: "absolute", bottom: -30, left: 120 }} />
+          : <PoligonPress style={{ position: "absolute", bottom: -30, left: 120 }} />
+
         }
 
       </TouchableOpacity>
@@ -76,6 +77,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             const isFocused = state.index === index;
 
             const onPress = () => {
+              setShowItem(false);
               const event = navigation.emit({
                 type: "tabPress",
                 target: route.key,
@@ -95,7 +97,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
             const obj = {
               Home: isFocused ? <Home/> :<Home1/>,
-              One: isFocused ? <BottomAppBarFoc1/> : <BottomAppBar1 />,
+              Notificat: isFocused ? <BottomAppBarFoc1/> : <BottomAppBar1 />,
               tow: isFocused ? <BootomAppBarFoc2/> : <BottomAppBar2 />,
               last: isFocused ? <PersonFoc/> : <Person1 />,
               CreateTask: <PolIcon1 />,

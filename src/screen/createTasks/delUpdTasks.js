@@ -11,6 +11,7 @@ import ButtonDel from '../../components/buttonUpdDel/buttonDel';
 import ModalWindow from '../../components/modalWindow/modalWindow';
 import {durat} from '../../items/durat';
 import {proj} from '../../items/proj';
+import HideTabBar from '../../functions/hideTabBar';
 import { removeTasksAction, editTasksAction, clickIdAction } from "../../tasksReducer/taskReducer";
 
 
@@ -26,7 +27,8 @@ const DelUpdTasks=({navigation, route})=>{
   const elemId=useSelector((state)=>state.tasks.taskId);
   const dispatch=useDispatch();
 
-  console.log(elemId);
+  HideTabBar(navigation);
+
 
   const editTask=()=>{
 
@@ -41,14 +43,12 @@ const DelUpdTasks=({navigation, route})=>{
     setNumb('');
     setNumb1('');
     setNumb2('');
-
+    navigation.navigate('Home');
   }
-
 
   function removeTasks(id) {
     dispatch(removeTasksAction(elemId.id));
     navigation.navigate('Home');
-
   }
 
   const doSomething=(value)=>{

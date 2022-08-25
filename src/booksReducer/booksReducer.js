@@ -12,6 +12,7 @@ export const ADD_BOOKS = "ADD_BOOKS";
 export const UPD_DAYS="UPD_DAYS";
 
 const booksReducer = function (state = initialState, action) {
+  //console.log(action);
   switch (action.type) {
     case ADD_BOOKS:
       return { ...state, books: [...state.books, action.payload] };

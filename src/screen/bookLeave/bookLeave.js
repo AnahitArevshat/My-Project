@@ -13,6 +13,8 @@ import Chack from "../../assets/chacked.svg";
 import { durat } from "../../items/durat";
 import { addBooksAction } from "../../booksReducer/booksReducer";
 import moment from "moment/moment";
+import HideTabBar from '../../functions/hideTabBar';
+import { useDispatch } from "react-redux";
 
 const BookLeave=({navigation})=> {
   const [mod, setMod]=useState(false);
@@ -25,7 +27,13 @@ const BookLeave=({navigation})=> {
     });
   const [itemBooks, setItemBooks]=useState({});
   const [ind, setInd]=useState(0);
+  const [markDay, setMarkDay]=useState('');
   const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
+  const dispatch=useDispatch();
+
+console.log(markDay);
+
+  HideTabBar(navigation);
 
   const doSomething=(value)=> {
     switch (ind) {
@@ -57,12 +65,12 @@ const BookLeave=({navigation})=> {
 
   const createBook=(values)=>{
     const newItem = {
-      ...itemEvents,
+      ...itemBooks,
       id: Date.now(),
       type:values.type,
-      dat:values.dat,
-      time:values.tim,
-      duration:values.duration,
+      dat:markDay,
+      time:'',
+      duration:'',
       descript:values.descript,
     };
 
@@ -74,7 +82,7 @@ const BookLeave=({navigation})=> {
       bookTime:'',
       bookDuration:''});
     //navigation.navigate('Home');
-    setInd(8);
+    setInd(4);
     setMod(true);
   }
   useEffect(()=>{
@@ -82,6 +90,9 @@ const BookLeave=({navigation})=> {
       setMod(true);
     }
     if(ind===3 && bookNum.bookType===3){
+      setMod(true);
+    }
+    if(ind===4 && bookNum.bookType===3) {
       setMod(true);
     }
   }, [ind])
@@ -113,7 +124,7 @@ const BookLeave=({navigation})=> {
             </TouchableOpacity>
         <View style={{marginTop:20, width:314, height :252, borderRadius:4}}>
             <Shadow style={{width:314, borderRadius:4}}>
-              <Calendar monthFormat={'MMMM'} markedDates={{[curDay]:  {selected: true, selectedColor: '#347474'} }}/>
+              <Calendar monthFormat={'MMMM'} onDayPress={(day) => {setMarkDay(day.dateString)}} markedDates={{[curDay]:  {selected: true, selectedColor: '#347474'} }}/>
             </Shadow>
         </View>
             <View style={styles.mult}>

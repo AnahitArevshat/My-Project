@@ -102,7 +102,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
                   buttons={['Meeting', 'Teambuilding', 'Trainings', 'Events']}
                   doSomthingAfterClick={printButtonLable}/>
               </View>
-              <View style={{marginTop:20}}>
+              <View style={{marginTop:-60}}>
                 <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numType)}/>
               </View>
               </View>
@@ -134,7 +134,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View>
+                <View style={{marginTop:-30}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numOrgnizer)}/>
                 </View>
               </View>
@@ -166,7 +166,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
                     doSomthingAfterClick={printButtonLable}
                    />
                 </View>
-                <View>
+                <View style={{marginTop:-60}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numParticip)}/>
                 </View>
               </View>
@@ -197,7 +197,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
                     buttons={['Meeting rooms', 'Meeting room1',]}
                     doSomthingAfterClick={printButtonLable}/>
                 </View>
-                <View>
+                <View style={{marginTop:-60}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numRoom)}/>
                 </View>
               </View>
@@ -252,14 +252,14 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
                 <Clos style={{marginLeft:350}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'70%', alignItems:'center'}}>
-                <Text style={styles.txt}>Choose Room</Text>
+                <Text style={styles.txt}>Actual duration</Text>
                 <View  style={[styles.contan, {marginTop: 20}]}>
                   <ButtonGroupForModal
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day', 'Full day']}
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View>
+                <View style={{marginTop:-60}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numDuration)}/>
                 </View>
               </View>

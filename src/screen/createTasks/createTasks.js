@@ -12,7 +12,7 @@ import ModalWindow from '../../components/modalWindow/modalWindow';
 import {durat} from '../../items/durat';
 import {proj} from '../../items/proj';
 import {addTaskAction} from '../../tasksReducer/taskReducer';
-import InputTasck from '../../components/input/inputTasck';
+import HideTabBar from '../../functions/hideTabBar';
 
 const CreateTasks=({navigation, route})=>{
   const [showCalendar, setShowCalendar] = useState(false);
@@ -26,9 +26,12 @@ const CreateTasks=({navigation, route})=>{
   const task=useSelector(state=>state.tasks.tasks);
   const dispatch=useDispatch();
 
+  HideTabBar(navigation);
+
   /*const register=()=>{
     navigation.push('HomePage', {title:title});
   }*/
+
 
   const createTask=(values)=>{
       const newItem = {
@@ -73,6 +76,8 @@ const CreateTasks=({navigation, route})=>{
     setInd(3);
     setMod(!mod)
   }
+
+
 
   return(
     <Formik initialValues={{title:'',projects:'', dat:'', duration:''}}
