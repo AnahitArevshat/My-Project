@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from "react-native";
+import {View, TextInput, StyleSheet} from "react-native";
+import size from '../../functions/ratio';
 
-const InputTasck=({name,  onChange=()=>{}, onFocus=()=>{},...props})=> {
+const InputTasck=({name, onChange=()=>{}, onFocus=()=>{},...props})=> {
   const[isFocused, setIsFocused]=useState(false);
   return (
       <View style={styles.commonInput}>
 
         <TextInput
-          style={{ paddingLeft: 15, }}
+          style={{ paddingLeft:size.size15}}
           onFocus={()=>{onFocus();setIsFocused(true)}}
           placeholder={name} />
 

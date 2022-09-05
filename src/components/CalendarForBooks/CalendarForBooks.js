@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import {useSelector, useDispatch} from "react-redux";
 import {Calendar} from 'react-native-calendars';
 import { Shadow } from 'react-native-shadow-2';
+import size from '../../functions/ratio';
 
 
 import moment from 'moment';
@@ -56,9 +57,9 @@ const CalendarForBooks=()=>{
   return(<View>
       <TouchableOpacity onPress={()=>setShowItem(!showItem)}>
       </TouchableOpacity>
-      <Text style={{color: '#11493E', fontSize:16, fontWeight:'500', letterSpacing:0.25, marginBottom:20, marginLeft:35}}>{arr.length>1 && datFor}</Text>
+      <Text style={{color: '#11493E', fontSize:size.size16, fontWeight:'500', letterSpacing:0.25, marginBottom:size.size20, marginLeft:size.size35}}>{arr.length>1 && datFor}</Text>
       <View style={{alignItems:'center'}}>
-      <Shadow style={{width:320, borderRadius:4,}}>
+      <Shadow style={{width:size.size320, borderRadius:size.size4,}}>
       <Calendar  markingType={'period'}
                  onDayPress={(day) => updateStore(day)}
                  markedDates= {obj}

@@ -4,6 +4,7 @@ import { Text, StyleSheet, TouchableOpacity, View, FlatList, Switch } from "reac
 import CheckBox from '@react-native-community/checkbox';
 import CheckButGrForOrgn from '../butonGroup/chackButGrForOrgn';
 import { updEventsHamar } from "../../eventsReducer/eventsReducer";
+import size from '../../functions/ratio';
 
 const CheckButGrForPartic=({buttons, doSomthingAfterClick})=>{
 
@@ -34,7 +35,7 @@ const CheckButGrForPartic=({buttons, doSomthingAfterClick})=>{
         </TouchableOpacity>
           {index===clickedId
             &&
-            <View style={{marginRight:230}}>
+            <View style={{marginRight:size.size230}}>
               <CheckButGrForOrgn
                 buttons={['Name Surname', 'Name Surname', 'Name Surname']}
                 doSomthingAfterClick={printButtonLable}
@@ -60,10 +61,9 @@ const styles=StyleSheet.create({
     alignItems: 'center',
   },
   txt:{
-    fontSize:14,
+    fontSize:size.size14,
     fontWeight:'500',
     letterSpacing:0.25,
-    //marginBottom:20
   }
 })
 

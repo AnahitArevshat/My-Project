@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import {useNavigation} from "@react-navigation/native";
-import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
-import { Text, TouchableOpacity, View, ImageBackground, Image, StyleSheet } from "react-native";
+import {TouchableOpacity, View, ImageBackground, StyleSheet } from "react-native";
 import Home1 from "../../assets/home1.svg";
 import BottomAppBar1 from "../../assets/BottomAppBar1.svg";
 import BottomAppBar2 from "../../assets/BottomAppBar2.svg";
@@ -16,6 +14,7 @@ import BottomAppBarFoc1 from '../../assets/BoottomAppBarFoc1.svg';
 import BootomAppBarFoc2 from '../../assets/BottomAppBarFoc2.svg';
 import PersonFoc from '../../assets/PersonFoc.svg';
 import CreateEvents from "../../screen/createEvents/createEvents";
+import size from '../../functions/ratio';
 
 
 function MyTabBar({ state, descriptors, navigation }) {
@@ -40,7 +39,6 @@ function MyTabBar({ state, descriptors, navigation }) {
     setShowItem(false);
     navigation.navigate('BookLeave');
   }
- // console.log(focusedOptions);
 
   return (
 
@@ -48,10 +46,10 @@ function MyTabBar({ state, descriptors, navigation }) {
       <TouchableOpacity onPress={() => setShowItem(!showItem)}>
         {showItem ?
           (
-            <Poligon style={{ position: "absolute", bottom: -30, left: 120 }} />
+            <Poligon style={{ position: "absolute", bottom: (size.size28*-1), left:size.size125 }} />
 
           )
-          : <PoligonPress style={{ position: "absolute", bottom: -30, left: 120 }} />
+          : <PoligonPress style={{ position: "absolute", bottom: (size.size28*-1), left:size.size125 }} />
 
         }
 
@@ -67,7 +65,7 @@ function MyTabBar({ state, descriptors, navigation }) {
         </View>
 
       ) : null}
-      <ImageBackground style={{ width: 340, height: 70, marginBottom: 5 }}
+      <ImageBackground style={{ width: size.size340, height:size.size70, marginBottom: size.size5 }}
                        source={require("../../image/Rectangle843.png")}>
         <View style={{ flex: 1, flexDirection: "row" }}>
           {state.routes.map((route, index) => {
@@ -98,8 +96,8 @@ function MyTabBar({ state, descriptors, navigation }) {
             const obj = {
               Home: isFocused ? <Home/> :<Home1/>,
               Notificat: isFocused ? <BottomAppBarFoc1/> : <BottomAppBar1 />,
-              tow: isFocused ? <BootomAppBarFoc2/> : <BottomAppBar2 />,
-              last: isFocused ? <PersonFoc/> : <Person1 />,
+              Activat: isFocused ? <BootomAppBarFoc2/> : <BottomAppBar2 />,
+              Prof: isFocused ? <PersonFoc/> : <Person1 />,
               CreateTask: <PolIcon1 />,
               CreateEvents: <PolIcon2 />,
               CreateBookLeave: <PolIcon3 />,
@@ -135,28 +133,28 @@ export default MyTabBar;
 const styles=StyleSheet.create({
   button:{
     position:'absolute',
-    top:-80,
+    top:(size.size80*-1),
     justifyContent:'center',
     alignItems:'center'
   },
   secBut:{
     position:'absolute',
-    top:-90,
-    left:90,
+    top:(size.size90*-1),
+    left:size.size99,
     justifyContent:'center',
     alignItems:'center',
   },
   thirdBut:{
     position:'absolute',
-    top:-125,
-    left:146,
+    top:(size.size124*-1),
+    left:size.size150,
     justifyContent:'center',
     alignItems:'center',
   },
   forthBut:{
     position:'absolute',
-    top:-90,
-    left:203,
+    top:(size.size90*-1),
+    left:size.size201,
     justifyContent:'center',
     alignItems:'center',
   }

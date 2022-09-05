@@ -13,6 +13,7 @@ import {durat} from '../../items/durat';
 import {proj} from '../../items/proj';
 import HideTabBar from '../../functions/hideTabBar';
 import { removeTasksAction, editTasksAction, clickIdAction } from "../../tasksReducer/taskReducer";
+import size from '../../functions/ratio';
 
 
 const DelUpdTasks=({navigation, route})=>{
@@ -82,8 +83,8 @@ const DelUpdTasks=({navigation, route})=>{
         <SafeAreaView style={styles.conteiner}>
           {mod && <ModalWindow ind={ind} doSomething={doSomething}/>}
 
-          <View style={{width:100, height:27}}>
-            <Text style={{fontSize:16, fontWeight:'500', lineHeight:24, letterSpacing:0.25, color: '#1B3131'}}>Update Task</Text>
+          <View style={{width:size.size100, height:size.size27}}>
+            <Text style={{fontSize:size.size16, fontWeight:'500', lineHeight:size.size24, letterSpacing:0.25, color: '#1B3131'}}>Update Task</Text>
           </View>
           <View style={styles.emailContainer}>
             <View style={styles.commonInput}>
@@ -92,8 +93,8 @@ const DelUpdTasks=({navigation, route})=>{
           </View>
           <TouchableOpacity onPress={clickProg} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:13, color:'light', marginLeft:14}}>Projects*</Text>
-              <View style={{alignItems:'center', marginLeft:50}}>
+              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size8}}>Projects*</Text>
+              <View style={{alignItems:'center', marginLeft:size.size50}}>
                 <Text style={{fontWeight:'bold'}}>{numb1!=='' ? proj[numb1].name : elemId.projects}</Text>
               </View>
             </View>
@@ -103,8 +104,8 @@ const DelUpdTasks=({navigation, route})=>{
           </TouchableOpacity>
           <TouchableOpacity onPress={clickDat} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:13, color:'light', marginLeft:14}}>Date</Text>
-              <View style={{alignItems:'center', marginLeft:80}}>
+              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size9}}>Date</Text>
+              <View style={{alignItems:'center', marginLeft:size.size80}}>
                 <Text style={{fontWeight:'bold'}}>{numb2!=='' ? numb2 : elemId.dat}</Text>
               </View>
             </View>
@@ -114,8 +115,8 @@ const DelUpdTasks=({navigation, route})=>{
           </TouchableOpacity>
           <TouchableOpacity onPress={clickDur} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center' }}>
-              <Text style={{fontSize:13, color:'light',marginLeft:14}}>Duration</Text>
-              <View style={{alignItems:'center', marginLeft:60}}>
+              <Text style={{fontSize:size.size13, color:'light',marginLeft:size.size8}}>Duration</Text>
+              <View style={{alignItems:'center', marginLeft:size.size60}}>
                 <Text style={{fontWeight:'bold'}}>{numb !=='' ? durat[numb].name : elemId.duration}</Text>
               </View>
             </View>
@@ -124,8 +125,8 @@ const DelUpdTasks=({navigation, route})=>{
             </TouchableOpacity>
           </TouchableOpacity>
 
-          <View style={{flexDirection:'row', marginTop:50}}>
-            <View style={{marginRight:10}}>
+          <View style={{flexDirection:'row', marginTop:size.size50}}>
+            <View style={{marginRight:size.size7}}>
               <ButtonDel title='Delete' onPress={removeTasks}/>
            </View>
             <View>
@@ -142,12 +143,12 @@ const styles=StyleSheet.create({
     backgroundColor: '#FFFFFF;',
     flex: 1,
     alignItems: 'center',
-    marginTop:60
+    marginTop:size.size60
   },
   viewcont:{
     flexDirection: 'row',
-    width: 313,
-    marginTop: 35,
+    width: size.size313,
+    marginTop: size.size35,
     borderBottomWidth:0.5,
     borderBottomColor:'#E3E3E3',
   },
@@ -156,10 +157,10 @@ const styles=StyleSheet.create({
   },
   emailContainer: {
     flexDirection: "row",
-    height: 40,
-    marginTop: 25,
-    marginRight: 10,
-    marginLeft: 10,
+    height: size.size40,
+    marginTop: size.size25,
+    marginRight:size.size10,
+    marginLeft:size.size10,
     borderBottomWidth:0.5,
     borderBottomColor:'#E3E3E3',
   },

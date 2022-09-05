@@ -1,35 +1,81 @@
-import React from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import { Text, View, Image, StyleSheet, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import ButtonGroupeForNotif from '../../components/butonGroup/buttonGroupeForNotif';
-import { homeStyle } from "../HomePage/styleHomePage";
 import DevelopUnreadComponent from '../../components/DevelopUnreadComponent/DevelopUnreadComponent';
+import Notif from '../../assets/notific.svg';
+import {editNotificAction} from '../../notificReducer/notificReducer';
+import BottomSheetForNotif from "../../components/bottomSheetForNotif/bottomSheetForNotif";
+import size from '../../functions/ratio';
 
-const Notifications=()=>{
+
+const Notifications=({navigation})=>{
+  const [number, setNumber]=useState(1);
+  const develop=useSelector(state=>state.developers.developers);
+  const dispatch=useDispatch();
+  const [mod, setMod]=useState(false);
+  const [ind, setInd]=useState(0);
 
   const printButtonLable=(value)=>{
-    console.log(value);
+    setNumber(value);
+   }
+  const setIsRead=()=>{
+   develop.map((el)=>dispatch(editNotificAction({
+     id:el.id,
+     notif:false,
+   })
+   ));
   }
 
   return(
-    <View>
+    <>
+    <ScrollView>
     <View style={{alignItems:'center'}}>
-    <View style={{marginTop:50}}>
+    <View style={{marginTop:size.size50}}>
     <Text style={styles.txt}>Notifications</Text>
     </View>
-    <View style={{flexDirection: 'row', width:340, marginTop: 30}}>
+    <View style={{flexDirection: 'row', width:size.size340, marginTop:size.size30, marginLeft:size.size25}}>
       <ButtonGroupeForNotif
         buttons={['Unread', 'Read']}
         doSomthingAfterClick={printButtonLable}
       />
     </View>
-    <TouchableOpacity style={{marginTop:20, marginLeft:225}}>
-      <Text style={styles.txt1}>Mark all as read</Text>
+    <TouchableOpacity style={{marginTop:size.size20, marginLeft:size.size200}} onPress={setIsRead}>
+      {number===1 && <Text style={styles.txt1}>Mark all as read</Text>}
     </TouchableOpacity>
   </View>
-      <View style={{marginTop:30, marginLeft:40}}>
-    <DevelopUnreadComponent/>
+      <View style={{marginTop:size.size30, marginLeft:size.size40}}>
+        {number===1 && develop.filter((item)=>item.notif===false).length===0
+          &&
+          <View style={{alignItems:'center', marginTop:size.size150, marginRight:size.size40}}>
+         <Notif/>
+          </View>}
+        {number===0 && develop.filter((item)=>item.notif===true).length===0
+          &&
+          <View style={{alignItems:'center', marginTop:size.size150, marginRight:size.size40}}>
+            <Notif/>
+          </View>
+        }
+        {number===1
+          ?
+          <DevelopUnreadComponent el={develop.filter((item)=>item.notif===false)} mod={mod} setMod={setMod} ind={ind} setInd={setInd}/>
+          :
+          <DevelopUnreadComponent el={develop.filter((item)=>item.notif===true)} mod={mod} setMod={setMod} ind={ind} setInd={setInd}/>}
+
       </View>
-  </View>
+
+  </ScrollView>
+      {mod ? navigation.setOptions({
+          tabBarStyle: { display: "none" },
+        })
+        :
+        navigation.setOptions({
+          tabBarStyle: { display: "flex" },
+          keyboardHidesTabBar: true
+        })
+      }
+      {mod && <BottomSheetForNotif ind={ind} mod={mod} setMod={setMod} number={number}/>}
+  </>
   )
 }
 
@@ -38,17 +84,18 @@ export default Notifications;
 
 const styles=StyleSheet.create({
   txt: {
-    fontSize:16,
+    fontSize:size.size16,
     fontWeight:'500',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
     color: '#1B3131'
   },
   txt1:{
-    fontSize:12,
+    fontSize:size.size12,
     fontWeight:'500',
-    lineHeight:15,
+    lineHeight:size.size15,
     color: '#347474',
-    textAlign:'right'
+    textAlign:'right',
+    marginRight:(size.size50*-1)
   }
 })

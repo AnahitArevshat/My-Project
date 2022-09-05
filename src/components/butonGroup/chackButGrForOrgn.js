@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Text, StyleSheet, TouchableOpacity, View, FlatList, Switch } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
+import size from '../../functions/ratio';
 
 
 const CheckButGrForOrgn=({buttons, doSomthingAfterClick})=>{
@@ -44,10 +45,9 @@ const styles=StyleSheet.create({
     alignItems: 'center',
   },
   txt:{
-    fontSize:14,
+    fontSize:size.size14,
     fontWeight:'500',
     letterSpacing:0.25,
-    //marginBottom:20
   }
 })
 

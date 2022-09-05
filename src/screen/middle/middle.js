@@ -2,11 +2,79 @@ import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {
   StyleSheet, Text, View,FlatList
 } from 'react-native'
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryGroup, VictoryAxis, VictoryStack, VictoryLine, VictoryScatter} from "victory-native";
 import {useSelector, useDispatch} from "react-redux";
+import size from "../../functions/ratio";
+
+
+const random = (min, max) => Math.floor(min + Math.random() * max);
+const getScatterData = () => {
+  const colors = [
+    "violet",
+    "cornflowerblue",
+    "gold",
+    "orange",
+    "turquoise",
+    "tomato",
+    "greenyellow"
+  ];
+  const symbols = [
+    "circle",
+    "star",
+    "square",
+    "triangleUp",
+    "triangleDown",
+    "diamond",
+    "plus"
+  ];
+  return Array(25)
+    .fill()
+    .map((index) => {
+      const scaledIndex = Math.floor(index % 7);
+      return {
+        x: random(10, 50),
+        y: random(2, 100),
+        size: random(8) + 3,
+        symbol: symbols[scaledIndex],
+        fill: colors[random(0, 6)],
+        opacity: 0.6
+      };
+    });
+};
 
 
 const Middle = props => {
-  const book =useSelector(state=>state.books.books);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setData(getScatterData());
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+
+  return(
+
+   <VictoryChart animate={{ duration: 2000, easing: "bounce" }}>
+      <VictoryScatter
+        data={data}
+        style={{
+          data: {
+            fill: ({ datum }) => datum.fill,
+            opacity: ({ datum }) => datum.opacity
+          }
+        }}
+      />
+    </VictoryChart>
+  );
+
+}
+export default Middle;
+
+
+//create Book Live//
+/*const book =useSelector(state=>state.books.books);
   const dispatch=useDispatch();
 
   return(
@@ -22,9 +90,11 @@ const Middle = props => {
       />
 
     </View>
-  );
-}
-export default Middle;
+  );*/
+
+
+
+
 
 
 /*import React, {useState, useEffect, useLayoutEffect} from 'react';

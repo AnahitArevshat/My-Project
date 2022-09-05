@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import ForgotPassword from "../screen/ForgotPassword/ForgotPassword";
 import LoginPage from '../screen/LoginPage/LoginPage';
 import TabScreens from '../navigation/TabScreens';
-import CreateTasks from "../screen/createTasks/createTasks";
-import CreateEvents from "../screen/createEvents/createEvents";
 
 const Stack = createStackNavigator();
 

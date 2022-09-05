@@ -8,9 +8,12 @@ import Two from '../screen/two/two';
 import CreateTasks from "../screen/createTasks/createTasks";
 import CreateEvents from '../screen/createEvents/createEvents';
 import BookLeave from '../screen/bookLeave/bookLeave';
-import Middle from '../screen/middle/middle';
+import Profile from '../screen/Profile/Profile';
 import DelUpdTasks from "../screen/createTasks/delUpdTasks";
 import Notifications from "../screen/notifications/notification";
+import Activity from "../screen/Activity/Activity";
+import HistoryTasks from "../screen/HistoryTasks/HistoryTasks";
+import HistoryEvents from "../screen/HistoryEvents/HistoryEvents";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,12 +36,12 @@ function TabScreens() {
         component={Notifications}
         />
       <Tab.Screen
-        name="tow"
-        component={Two}
+        name="Activat"
+        component={Activity}
         />
         <Tab.Screen
-          name="last"
-          component={Middle}
+          name="Prof"
+          component={Profile}
           />
 
       <Tab.Screen
@@ -56,6 +59,14 @@ function TabScreens() {
         <Tab.Screen
           name="DelUpd"
           component={DelUpdTasks}
+        />
+        <Tab.Screen
+          name="HisTas"
+          component={HistoryTasks}
+        />
+        <Tab.Screen
+          name="HisEven"
+          component={HistoryEvents}
         />
     </Tab.Navigator>
 

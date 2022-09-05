@@ -1,3 +1,5 @@
+import size from '../../functions/ratio';
+
 export const homeStyle = {
   container: {
     backgroundColor: '#FFFFFF;',
@@ -5,46 +7,25 @@ export const homeStyle = {
     alignItems: 'center',
   },
   img: {
-    width: 263,
-    height: 241,
+    width: size.size263,
+    height: size.size241,
   },
   viw:{
-    width: 101,
-    height: 28,
+    width: size.size101,
+    height: size.size28,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor:'#347474',
   },
   navigItem: {
     flexDirection: 'row',
-    //backgroundColor: '#347474',
-    width:315,
-    padding: 10,
+    width:size.size315,
+    padding: size.size10,
+    marginRight:size.size20
   },
   navbut:{
     flexDirection: 'row',
     backgroundColor: '#347474',
-    borderRadius: 4,
+    borderRadius: size.size4,
     }
 };
 
-
-
-/*
-
-        <View style={[homeStyle.viw, {backgroundColor: focused ? "#E7F2F2" : '#347474'}]}>
-          <TouchableOpacity onPress={()=>setFocused(!focused)}>
-          <Text style={{color: focused ? "#347474" : '#E7F2F2'}}>Tasks</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[homeStyle.viw, {backgroundColor: focused ? "#E7F2F2" : '#347474'}]}>
-          <TouchableOpacity onPress={()=>setFocused(true)}>
-            <Text style={{color: focused ? "#347474" : '#E7F2F2'}}>Events</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[homeStyle.viw, {backgroundColor: !focused ? "#E7F2F2" : '#347474'}]}>
-          <TouchableOpacity onPress={()=>setFocused(focused)}>
-            <Text style={{color: !focused ? "#347474" : '#E7F2F2'}}>All</Text>
-          </TouchableOpacity>
-        </View>
-*/

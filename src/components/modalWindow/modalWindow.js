@@ -3,10 +3,12 @@ import{Text, View, StyleSheet, Modal, TouchableOpacity} from "react-native";
 import {Calendar} from 'react-native-calendars';
 import { Shadow } from 'react-native-shadow-2';
 import Button from "../button/button";
+import ButtonSmall from '../button/buttonSmall';
 import ButtonGroupForModal from '../butonGroup/buttonGroupeForModal';
 import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
 import moment from "moment/moment";
 import Clos from '../../assets/clos.svg';
+import size from '../../functions/ratio';
 
 const ModalWindow=({doSomething, ind})=>{
   const [mod, setMod]=useState(true);
@@ -38,23 +40,23 @@ const ModalWindow=({doSomething, ind})=>{
 
     <Modal visible={mod}>
       <TouchableOpacity onPress={()=>setMod(false)}>
-        <Clos style={{marginTop:20, marginLeft:370}}/>
+        <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
       </TouchableOpacity>
         <View style={styles.contan}>
         <View style={{width:'100%', height:'30%', alignItems:'center'}}>
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: size.size10}}>
       <Text style={styles.txt}>Actual duration</Text>
         </View>
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: size.size20}}>
           <Text style={styles.txt1}>Select actual duration you spent on this task</Text>
         </View>
-      <View  style={{marginTop: 20}}>
+      <View  style={{marginTop: size.size20}}>
           <ButtonGroupForModal
             buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day', 'Full day']}
             doSomthingAfterClick={printButtonLable}
           />
       </View>
-      <View>
+      <View style={{marginTop:(size.size70*-1)}}>
         <Button title='Select'onPress={(el)=>HandleClick(el, num)}/>
       </View>
       </View>
@@ -68,7 +70,7 @@ const ModalWindow=({doSomething, ind})=>{
     return(
       <Modal visible={mod}>
         <TouchableOpacity onPress={()=>setMod(false)}>
-          <Clos style={{marginTop:20, marginLeft:370}}/>
+          <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
         </TouchableOpacity>
         <View style={styles.contan}>
           <View style={{width:'100%', height:'50%', alignItems:'center'}}>
@@ -92,17 +94,17 @@ if(ind===3) {
   return(
     <Modal visible={mod}>
       <TouchableOpacity onPress={()=>setMod(false)}>
-        <Clos style={{marginTop:20, marginLeft:370}}/>
+        <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
       </TouchableOpacity>
        <View style={styles.contan}>
 
-           <Text style={[styles.txt, {marginBottom:30}]}>Select Day</Text>
-         <Shadow style={{width:320, borderRadius:4}}>
+           <Text style={[styles.txt, {marginBottom:size.size30}]}>Select Day</Text>
+         <Shadow style={{width:size.size300, borderRadius:size.size4}}>
         <Calendar onDayPress={(day) => {setNum2(day.dateString)}}
         />
          </Shadow>
          <View>
-           <Button title='Select'onPress={(el)=>HandleClick(el, normDat)}/>
+           <ButtonSmall title='Select'onPress={(el)=>HandleClick(el, normDat)}/>
          </View>
       </View>
 
@@ -114,20 +116,20 @@ const styles=StyleSheet.create({
   contan:{
     flex:1,
     alignItems:'center',
-    marginTop:30
-    //justifyContent:'center',
+    marginTop:size.size30,
+    marginBottom:(size.size200*-1),
   },
   txt:{
-    fontSize:16,
+    fontSize:size.size16,
     fontWeight:'600',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
     color: '#11493E',
   },
   txt1:{
-    fontSize:14,
+    fontSize:size.size14,
     fontWeight:'500',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
    }
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
+import size from '../../functions/ratio';
 
 const ButtonGroupeForNotif=({buttons, doSomthingAfterClick})=>{
 
@@ -32,8 +33,8 @@ const styles=StyleSheet.create({
     flexDirection:'row',
   },
   button:{
-    height:28,
-    width:164,
+    height:size.size28,
+    width:size.size158,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#347474',
@@ -48,8 +49,8 @@ const styles=StyleSheet.create({
   },
 
   buttonActive:{
-    height:28,
-    width:164,
+    height:size.size28,
+    width:size.size170,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#E7F2F2',

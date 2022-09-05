@@ -1,3 +1,5 @@
+import size from '../../functions/ratio';
+
 export const secondStyle = {
   container: {
     backgroundColor: '#FAFAFA',
@@ -6,7 +8,13 @@ export const secondStyle = {
     justifyContent: "center"
   },
   img: {
-    width: 263,
-    height: 241,
+    width: size.size263,
+    height: size.size241,
   },
+  txt:{
+    fontSize: size.size24,
+    lineHeight: size.size32,
+    fontWeight: '600',
+    color: '#11493E'
+  }
 }

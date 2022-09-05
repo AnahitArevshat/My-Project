@@ -8,10 +8,12 @@ import CheckButGrForOrgn from '../butonGroup/chackButGrForOrgn';
 import CheckButGrForPartic from '../butonGroup/ChackButGrforPartic';
 import moment from "moment/moment";
 import Button from "../button/button";
+import ButtonSmall from '../button/buttonSmall';
 import Clos from '../../assets/clos.svg';
 import { Calendar } from "react-native-calendars";
 import ButtonGroupForModal from "../butonGroup/buttonGroupeForModal";
 import Greate from '../../assets/greate.svg';
+import size from '../../functions/ratio';
 
 const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
 
@@ -40,7 +42,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
   }, []);
 
   const handleClosePress = () => {
-    bottomSheetRef.current.close();
+    // bottomSheetRef.current.close();
     setMod(false);
     }
 
@@ -76,7 +78,6 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
   const HandleClick=(el, id)=>{
     doSomething(id);
     setMod(false);
-
   }
 
   switch(ind){
@@ -93,16 +94,16 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
         <BottomSheetView>
         <View style={styles.contentContainer}>
           <TouchableOpacity onPress={handleClosePress}>
-          <Clos style={{marginLeft:350}}/>
+          <Clos style={{marginLeft:size.size330}}/>
           </TouchableOpacity>
             <View style={{width:'100%', height:'80%', alignItems:'center'}}>
              <Text style={styles.txt}>Choose Event Type</Text>
-              <View  style={styles.contan}>
+              <View  style={styles.contentContainer}>
                 <CheckButtonGroupe
                   buttons={['Meeting', 'Teambuilding', 'Trainings', 'Events']}
                   doSomthingAfterClick={printButtonLable}/>
               </View>
-              <View style={{marginTop:-60}}>
+              <View style={{marginTop:(size.size60*-1)}}>
                 <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numType)}/>
               </View>
               </View>
@@ -124,17 +125,17 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'80%', alignItems:'center'}}>
                 <Text style={styles.txt}>Orgnizer</Text>
-                <View  style={styles.contan}>
+                <View  style={styles.contentContainer}>
                   <CheckButGrForOrgn
                     buttons={['Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname']}
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View style={{marginTop:-30}}>
+                <View style={{marginTop:(size.size30*-1)}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numOrgnizer)}/>
                 </View>
               </View>
@@ -156,17 +157,17 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'80%', alignItems:'center'}}>
                 <Text style={styles.txt}>Participators</Text>
-                <View  style={styles.contan}>
+                <View  style={styles.contentContainer}>
                   <CheckButGrForPartic
                     buttons={['Frontend team', 'Backend team', 'Mobile team', 'Dezign team', 'Managers', 'Team Leads']}
                     doSomthingAfterClick={printButtonLable}
                    />
                 </View>
-                <View style={{marginTop:-60}}>
+                <View style={{marginTop:(size.size60*-1)}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numParticip)}/>
                 </View>
               </View>
@@ -188,16 +189,16 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'70%', alignItems:'center'}}>
                 <Text style={styles.txt}>Choose Room</Text>
-                <View  style={styles.contan}>
+                <View  style={styles.contentContainer}>
                   <CheckButtonGroupe
                     buttons={['Meeting rooms', 'Meeting room1',]}
                     doSomthingAfterClick={printButtonLable}/>
                 </View>
-                <View style={{marginTop:-60}}>
+                <View style={{marginTop:(size.size60*-1)}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numRoom)}/>
                 </View>
               </View>
@@ -219,16 +220,16 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'100%', alignItems:'center'}}>
-                <Text style={[styles.txt, {marginBottom:30}]}>Choose Date</Text>
-                <Shadow style={{width:300, borderRadius:4}}>
+                <Text style={[styles.txt, {marginBottom:size.size30}]}>Choose Date</Text>
+                <Shadow style={{width:size.size300, borderRadius:size.size4}}>
                 <Calendar onDayPress={(day) => {setNumEvent({...numEvent, numDate:(day.dateString)})}}
                 />
                 </Shadow>
                   <View>
-                  <Button title='Select'onPress={(el)=>HandleClick(el, normDat)}/>
+                  <ButtonSmall title='Select'onPress={(el)=>HandleClick(el, normDat)}/>
                 </View>
               </View>
             </View>
@@ -249,17 +250,17 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'70%', alignItems:'center'}}>
                 <Text style={styles.txt}>Actual duration</Text>
-                <View  style={[styles.contan, {marginTop: 20}]}>
+                <View  style={[styles.contentContainer, {marginTop: size.size20, marginLeft:size.size13}]}>
                   <ButtonGroupForModal
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day', 'Full day']}
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View style={{marginTop:-60}}>
+                <View style={{marginTop:(size.size60*-1)}}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numDuration)}/>
                 </View>
               </View>
@@ -280,12 +281,12 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={greatClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'80%', alignItems:'center'}}>
-                <Greate style={{marginTop:50}}/>
-                <Text style={[styles.txt, {marginTop:50}]}>Greate!</Text>
-                <Text style={{marginTop:50}}>Event successfully created!</Text>
+                <Greate style={{marginTop:size.size50}}/>
+                <Text style={[styles.txt, {marginTop:size.size50}]}>Greate!</Text>
+                <Text style={{marginTop:size.size50}}>Event successfully created!</Text>
               </View>
             </View>
           </BottomSheetView>
@@ -296,32 +297,18 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
-   },
   contentContainer: {
    alignItems: 'center',
   },
-  contan:{
-   alignItems:'center',
-   },
+
   txt:{
-    fontSize:16,
+    fontSize:size.size16,
     fontWeight:'600',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
     color: '#11493E',
     },
 
-  txt1:{
-    fontSize:14,
-    fontWeight:'500',
-    lineHeight:24,
-    letterSpacing:0.25,
-    color: '#6B6A6C',
-  }
 
 });
 

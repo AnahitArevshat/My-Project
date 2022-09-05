@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView} from 'react-native';
 import moment from 'moment';
 import {Calendar} from 'react-native-calendars';
 import {homeStyle} from './styleHomePage';
@@ -9,6 +9,7 @@ import CalendarImageOff from '../../assets/calendarOff.svg';
 import ButtonGroup from '../../components/butonGroup/butonGroup';
 import TaskComp from '../../components/taskComp/taskComp';
 import EventComp from '../../components/eventComp/eventComp';
+import size from '../../functions/ratio';
 
 
 const HomePage = ({navigation, route}) => {
@@ -48,11 +49,11 @@ const HomePage = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={homeStyle.container}>
-      <View style={{height:28, marginBottom:20, marginRight:180, marginTop:20}}>
-      <Text style={{textAlign:'left', fontSize:24, fontWeight:'600'}}>Hello, Name</Text>
+      <View style={{height:size.size28, marginBottom:size.size20, marginRight:size.size180, marginTop:size.size20}}>
+      <Text style={{textAlign:'left', fontSize:size.size24, fontWeight:'600'}}>Hello, Name</Text>
       </View>
       <Image
-        style={{width: 315, height: 145, marginBottom: 15}}
+        style={{width: size.size315, height: size.size145, marginBottom: size.size15}}
         source={require('../../image/Frame736.png')}
 
       />
@@ -62,9 +63,9 @@ const HomePage = ({navigation, route}) => {
           doSomthingAfterClick={printButtonLable}
         />
       </View>
-      <View style={{flexDirection: 'row', width: 316, marginTop: 15}}>
+      <View style={{flexDirection: 'row', width: size.size310, marginTop:size.size15, marginLeft:size.size5}}>
         <View style={{flex: 1}}>
-          <Text style={{fontSize: 14, fontWeight: '600'}}>
+          <Text style={{fontSize:size.size14, fontWeight: '600'}}>
             {FormatedDat}
           </Text>
         </View>
@@ -72,12 +73,16 @@ const HomePage = ({navigation, route}) => {
           {showCalendar ? <CalendarImageOff/> : <CalendarImage/>}
         </TouchableOpacity>
       </View>
-      {showCalendar && <Calendar style={{width:316, marginTop:15}}
+      {showCalendar && <Calendar style={{width:size.size316, marginTop:size.size15}}
                                  markedDates={{[curDay]:  {selected: true, selectedColor: '#347474'}}}
                                  />}
       {num===0 && <TaskComp  el={task.tasks} navigation={navigation}/>}
       {num===1 && <EventComp el={event.events} />}
-      {num===2 && <View><TaskComp/><EventComp/></View>}
+      {num===2 && <View style={{alignItems:'center'}}>
+        <TaskComp el={task.tasks}/>
+        <EventComp el={event.events} />
+        </View>
+      }
     </SafeAreaView>  );
 };
 export default HomePage;

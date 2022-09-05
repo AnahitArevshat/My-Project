@@ -11,6 +11,7 @@ import {mainStyle} from './styleLoginPage';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
 import {getPhotosAction} from '../../reduxLogic/Actions/action'
+import size from '../../functions/ratio';
 
 
 const LoginPage=({navigation})=>{
@@ -68,16 +69,11 @@ const LoginPage=({navigation})=>{
   return (
     <SafeAreaView style={mainStyle.container}>
       <Image
-        style={{width: 263,height: 241, marginBottom:20}}
+        style={{width:size.size263,height:size.size241, marginBottom:20}}
         source={require("../../image/Group5591.png")}
       />
-      <Text style={{
-        fontSize: 24,
-        lineHeight: 32,
-        fontWeight: '600',
-        Letter: 0.25,
-      }}>Log in</Text>
-      <View style={{marginVertical:20}}>
+      <Text style={mainStyle.txt}>Log in</Text>
+      <View>
         <Input
           iconName='person-outline'
           placeholder='Email'
@@ -96,7 +92,7 @@ const LoginPage=({navigation})=>{
         />
         <Button title='Login' onPress={validate}/>
         <TouchableOpacity onPress={loadSecond}>
-          <Text style={{textAlign:'right', marginTop:15}}>Forgot password?</Text>
+          <Text style={{textAlign:'right', marginTop:size.size15}}>Forgot password?</Text>
         </TouchableOpacity>
 
       </View>

@@ -1,4 +1,3 @@
-//import {events} from '../items/events';
 import moment from 'moment';
 
 let dayNow=new Date();

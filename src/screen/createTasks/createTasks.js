@@ -11,8 +11,10 @@ import Button from '../../components/button/button';
 import ModalWindow from '../../components/modalWindow/modalWindow';
 import {durat} from '../../items/durat';
 import {proj} from '../../items/proj';
+import {color} from '../../items/tasks';
 import {addTaskAction} from '../../tasksReducer/taskReducer';
 import HideTabBar from '../../functions/hideTabBar';
+import size from '../../functions/ratio';
 
 const CreateTasks=({navigation, route})=>{
   const [showCalendar, setShowCalendar] = useState(false);
@@ -25,6 +27,8 @@ const CreateTasks=({navigation, route})=>{
   const [ind, setInd]=useState(0);
   const task=useSelector(state=>state.tasks.tasks);
   const dispatch=useDispatch();
+
+  let i = Math.floor((Math.random() * 3) );
 
   HideTabBar(navigation);
 
@@ -41,6 +45,7 @@ const CreateTasks=({navigation, route})=>{
       projects:values.projects,
       dat:values.dat,
       duration:values.duration,
+      color:color[i],
       };
 
     //console.log(newItem);
@@ -86,8 +91,8 @@ const CreateTasks=({navigation, route})=>{
         <SafeAreaView style={styles.conteiner}>
           {mod && <ModalWindow ind={ind} doSomething={doSomething}/>}
 
-          <View style={{width:100, height:27}}>
-            <Text style={{fontSize:16, fontWeight:'500', lineHeight:24, letterSpacing:0.25, color: '#1B3131'}}>Create Task</Text>
+          <View style={{width:size.size100, height:size.size27}}>
+            <Text style={{fontSize:size.size16, fontWeight:'500', lineHeight:size.size24, letterSpacing:0.25, color: '#1B3131'}}>Create Task</Text>
           </View>
           <View style={styles.emailContainer}>
             <View style={styles.commonInput}>
@@ -98,8 +103,8 @@ const CreateTasks=({navigation, route})=>{
           </View>
           <TouchableOpacity onPress={clickProg} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:13, color:'light', marginLeft:14}}>Projects*</Text>
-              <View style={{alignItems:'center', marginLeft:50}}>
+              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size10}}>Projects*</Text>
+              <View style={{alignItems:'center', marginLeft:size.size50}}>
                 <Text style={{fontWeight:'bold'}}>{numb1!=='' ? props.values.projects=proj[numb1].name : ''}</Text>
               </View>
             </View>
@@ -109,8 +114,8 @@ const CreateTasks=({navigation, route})=>{
           </TouchableOpacity>
           <TouchableOpacity onPress={clickDat} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:13, color:'light', marginLeft:14}}>Date</Text>
-              <View style={{alignItems:'center', marginLeft:80}}>
+              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size11}}>Date</Text>
+              <View style={{alignItems:'center', marginLeft:size.size80}}>
                 <Text style={{fontWeight:'bold'}}>{props.values.dat=numb2}</Text>
               </View>
             </View>
@@ -120,8 +125,8 @@ const CreateTasks=({navigation, route})=>{
           </TouchableOpacity>
           <TouchableOpacity onPress={clickDur} style={styles.emailContainer}>
             <View style={{width: '90%', flexDirection:'row', alignItems:'center' }}>
-              <Text style={{fontSize:13, color:'light',marginLeft:14}}>Duration</Text>
-              <View style={{alignItems:'center', marginLeft:60}}>
+              <Text style={{fontSize:size.size13, color:'light',marginLeft:size.size10}}>Duration</Text>
+              <View style={{alignItems:'center', marginLeft:size.size60}}>
                 <Text style={{fontWeight:'bold'}}>{numb !=='' ? props.values.duration=durat[numb].name : ''}</Text>
               </View>
             </View>
@@ -130,7 +135,7 @@ const CreateTasks=({navigation, route})=>{
             </TouchableOpacity>
           </TouchableOpacity>
 
-          <View style={{marginTop:50}}>
+          <View style={{marginTop:size.size50}}>
             <Button title='Create' onPress={props.handleSubmit}/>
           </View>
         </SafeAreaView>
@@ -145,12 +150,12 @@ const styles=StyleSheet.create({
     backgroundColor: '#FFFFFF;',
     flex: 1,
     alignItems: 'center',
-    marginTop:60
+    marginTop:size.size60
   },
   viewcont:{
     flexDirection: 'row',
-    width: 313,
-    marginTop: 35,
+    width: size.size313,
+    marginTop: size.size35,
     borderBottomWidth:0.5,
     borderBottomColor:'#E3E3E3',
   },
@@ -159,10 +164,10 @@ const styles=StyleSheet.create({
   },
   emailContainer: {
     flexDirection: "row",
-    height: 40,
-    marginTop: 25,
-    marginRight: 10,
-    marginLeft: 10,
+    height: size.size40,
+    marginTop: size.size25,
+    marginRight: size.size10,
+    marginLeft: size.size10,
     borderBottomWidth:0.5,
     borderBottomColor:'#E3E3E3',
   },

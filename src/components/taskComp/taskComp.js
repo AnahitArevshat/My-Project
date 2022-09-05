@@ -4,11 +4,9 @@ import {View, Text, TouchableOpacity, StyleSheet, FlatList} from "react-native";
 import moment from 'moment';
 import ChackIcon from '../chackIcon/chakIcon';
 import { clickIdAction } from "../../tasksReducer/taskReducer";
-import { tasks } from "../../items/tasks";
+import size from '../../functions/ratio';
 
 const TaskComp=({dat, el, navigation})=>{
-  const task=useSelector(state=>state.tasks.tasks);
-  const recId=useSelector((state)=>state.tasks.taskId);
 
   const dispatch=useDispatch();
 
@@ -21,7 +19,7 @@ const TaskComp=({dat, el, navigation})=>{
     <View style={styles.contain}>
         <FlatList data={el} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
           <TouchableOpacity onPress={()=>receveId(el[index])}>
-          <View style={{flexDirection:'row', alignItems:'center', backgroundColor:'#E7F2F2', marginBottom:5}}>
+          <View style={{flexDirection:'row', alignItems:'center', backgroundColor:'#E7F2F2', marginBottom:size.size5}}>
            <View>
             <ChackIcon />
             </View>
@@ -32,8 +30,8 @@ const TaskComp=({dat, el, navigation})=>{
             <Text>{item.duration}</Text>
               </View>
           </View>
-            <View style={{backgroundColor:'#F4C584', width:100, height:16, alignItems:'center'}}>
-            <Text style={{color:'#fff', fontSize:11}}>{item.projects}</Text>
+            <View style={[styles.proj, {backgroundColor:item.color}]}>
+            <Text style={{color:'#fff', fontSize:size.size11}}>{item.projects}</Text>
             </View>
 
         </View>
@@ -46,20 +44,23 @@ const TaskComp=({dat, el, navigation})=>{
 
 const styles=StyleSheet.create({
   contain:{
-    width:315,
-    borderRadius:4,
-    marginTop:20
+    width:size.size315,
+    borderRadius:size.size4,
+    marginTop:size.size20
     },
-  viewchild:{
-    width:315,
-    height:49,
-    marginTop:20,
-  },
-  txt:{fontSize:16,
+
+  txt:{fontSize:size.size16,
       fontWeight:'600',
-      lineHeight:24,
+      lineHeight:size.size24,
   },
 
+  proj:{
+    //backgroundColor:'#F4C584',
+    width:size.size100,
+    height:size.size16,
+    alignItems:'center',
+    marginRight:size.size10
+  }
       },
 
   )

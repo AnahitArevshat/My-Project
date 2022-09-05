@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import moment from 'moment';
@@ -11,6 +10,7 @@ import TimePicker from '../timePicker/timePicke';
 import CalendarVacation from '../CalendarVacation/CalendarVacation';
 import Greate from '../../assets/greate.svg';
 import InputTasck from "../input/inputTasck";
+import size from '../../functions/ratio';
 
 const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation}) => {
   let dayNow=new Date();
@@ -40,7 +40,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
   let normDat=moment(numBook.numDate).format('DD MMM YYYY');
 
    const handleClosePress = () => {
-    bottomSheetRef.current.close();
+    //bottomSheetRef.current.close();
     setMod(false);
   }
 
@@ -95,7 +95,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'75%', alignItems:'center'}}>
                 <Text style={styles.txt}>Choose book leave</Text>
@@ -128,19 +128,21 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:height}}>
-                <View style={{marginLeft:35}}>
+                <View style={{marginLeft:size.size28}}>
                 <Text style={styles.txt}>Hourly leave</Text>
                 </View>
-                <View style={{marginLeft:35, marginTop:20}}>
-                <Text style={styles.txt2}>{currentDay}</Text>
+                <View style={{marginLeft:size.size28, marginTop:size.size20}}>
+                <Text style={styles.txt1}>{currentDay}</Text>
                 </View>
-                <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop:5}}>
-                <TimePicker/>
-
-                <View  style={{flex:1, alignItems:'center', justifyContent:'space-between', marginTop:30}}>
+                <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop:size.size5}}>
+                <View style={{marginLeft:size.size5}}>
+                  <TimePicker/>
+                </View>
+                <View  style={{flex:1, alignItems:'center', justifyContent:'space-between', marginTop:size.size30,
+                  marginLeft:(size.size10*-1)}}>
                   <ButtonGroupForBook
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day',]}
                     doSomthingAfterClick={printButtonLable}/>
@@ -148,7 +150,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
                 <View style={styles.mult}>
                   <InputTasck name='Description'multiline onChangeText={(text)=>setDesc(text)}/>
                  </View>
-                <View style={{alignItems:'center', marginBottom:340, marginTop:-35}}>
+                <View style={{alignItems:'center', marginBottom:size.size260, marginTop:(size.size5*-1)}}>
                   <Button title='Book'onPress={(el)=>HandleClick(el, numBook.numType)}/>
                 </View>
               </View>
@@ -172,10 +174,10 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'80%'}}>
-                <View style={{marginLeft:35}}>
+                <View style={{marginLeft:size.size35}}>
                   <Text style={styles.txt}>Vacation</Text>
                 </View>
                 <CalendarVacation/>
@@ -204,12 +206,12 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           <BottomSheetView>
             <View style={styles.contentContainer}>
               <TouchableOpacity onPress={greatClosePress}>
-                <Clos style={{marginLeft:350}}/>
+                <Clos style={{marginLeft:size.size330}}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:'70%', alignItems:'center'}}>
-                <Greate style={{marginTop:50}}/>
-                <Text style={[styles.txt, {marginTop:50}]}>Greate!</Text>
-                <Text style={{marginTop:50}}>Time successfully booked!</Text>
+                <Greate style={{marginTop:size.size50}}/>
+                <Text style={[styles.txt, {marginTop:size.size50}]}>Greate!</Text>
+                <Text style={{marginTop:size.size50}}>Time successfully booked!</Text>
               </View>
             </View>
           </BottomSheetView>
@@ -220,42 +222,31 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
-  },
-  contentContainer: {
+   contentContainer: {
     alignItems: 'center',
   },
   contan:{
     alignItems: 'center',
      },
   txt:{
-    fontSize:16,
+    fontSize:size.size16,
     fontWeight:'600',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
     color: '#11493E',
   },
 
   txt1:{
-    fontSize:14,
+    fontSize:size.size16,
     fontWeight:'500',
-    lineHeight:24,
-    letterSpacing:0.25,
-    color: '#6B6A6C',
-  },
-  txt2:{
-    fontSize:16,
-    fontWeight:'500',
-    lineHeight:24,
+    lineHeight:size.size24,
     letterSpacing:0.25,
     color: '#11493E',
   },
 
-  mult:{width:340, height: 91, borderWidth:1,borderColor: '#E3E3E3', borderRadius:6, marginBottom:30},
-  multil:{width:320, height: 91, borderWidth:1,borderColor: '#E3E3E3', borderRadius:6, marginTop:30, marginBottom:-15, marginLeft:45}
+  mult:{width:size.size325, height: size.size91, borderWidth:size.size1,borderColor: '#E3E3E3', borderRadius:size.size6},
+  multil:{width:size.size320, height: size.size91, borderWidth:size.size1,borderColor: '#E3E3E3', borderRadius:size.size6,
+    marginTop:size.size30, marginBottom:(size.size15*-1), marginLeft:size.size28}
 
 });
 

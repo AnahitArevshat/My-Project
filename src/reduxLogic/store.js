@@ -7,6 +7,7 @@ import {getLogicPhoto}  from "./logic";
 import taskReducer from '../tasksReducer/taskReducer';
 import eventsReducer from '../eventsReducer/eventsReducer';
 import booksReducer from '../booksReducer/booksReducer';
+import notificReducer from '../notificReducer/notificReducer';
 const logic = [getLogicPhoto];
 
 const persistConfig = {
@@ -21,8 +22,8 @@ const rootReducer = combineReducers({
   photosReducer: persistReducer(persistConfig, photoReducer),
   tasks:taskReducer,
   events:eventsReducer,
-  books:booksReducer
-
+  books:booksReducer,
+  developers:notificReducer,
 });
 
 const logicMiddleware = createLogicMiddleware(logic);

@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { Calendar } from "react-native-calendars";
 import moment from "moment";
 import { Shadow } from 'react-native-shadow-2';
+import size from '../../functions/ratio';
+
 
 const CalendarVacation = props => {
   const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
@@ -19,13 +21,13 @@ const CalendarVacation = props => {
     <View>
       <TouchableOpacity onPress={()=>setShowItem(!showItem)}>
       </TouchableOpacity>
-      <Text style={{color: '#11493E', fontSize:16, fontWeight:'500', letterSpacing:0.25, marginBottom:20, marginLeft:35}}>
+      <Text style={{color: '#11493E', fontSize:size.size16, fontWeight:'500', letterSpacing:0.25, marginBottom:size.size20,
+        marginLeft:size.size35}}>
         {(startDay && endDay) && moment(startDay).format('MMMM DD - ')+moment(endDay).format('DD, YYYY')}
       </Text>
       <View style={{alignItems:'center'}}>
-        <Shadow style={{width:320, borderRadius:4,}}>
+        <Shadow style={{width:size.size320, borderRadius:size.size4,}}>
           <Calendar
-
             onDayPress={(day) => {
               if (startDay && !endDay) {
                 const date = {}

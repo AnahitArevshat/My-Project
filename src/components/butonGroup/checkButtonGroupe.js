@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Text, StyleSheet, TouchableOpacity, View, FlatList, Switch } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
+import size from '../../functions/ratio';
 
 
 const CheckButtonGroupe=({buttons, doSomthingAfterClick})=>{
@@ -23,11 +24,11 @@ const CheckButtonGroupe=({buttons, doSomthingAfterClick})=>{
           <TouchableOpacity
             onPress={(el)=>HandleClick(el, index)}
             key={index}>
-            <View style={{flexDirection:'row', alignItems:'center', borderBottomWidth:1, borderBottomColor:'#F5F5F5', marginBottom:5}}>
+            <View style={{flexDirection:'row', alignItems:'center', borderBottomWidth:size.size1, borderBottomColor:'#F5F5F5'}}>
               <View>
                 <CheckBox value={index===clickedId ? true : false}/>
               </View>
-              <View style={{marginTop:20}}>
+              <View style={{marginTop:size.size20}}>
                 <Text style={styles.txt}>{item}</Text>
               </View>
             </View>
@@ -48,10 +49,10 @@ const styles=StyleSheet.create({
     alignItems: 'center',
   },
   txt:{
-    fontSize:14,
+    fontSize:size.size14,
     fontWeight:'500',
     letterSpacing:0.25,
-    marginBottom:20
+    marginBottom:size.size20
   }
 })
 

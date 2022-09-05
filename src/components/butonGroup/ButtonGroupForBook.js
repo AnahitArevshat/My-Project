@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Text, StyleSheet, TouchableOpacity, View, FlatList } from "react-native";
+import size from '../../functions/ratio';
 
 const ButtonGroupForBook=({buttons, doSomthingAfterClick})=>{
 
@@ -35,25 +36,20 @@ export default ButtonGroupForBook;
 const styles=StyleSheet.create({
   contain:{
     flex:1,
-    //:'row',
-    //flexWrap:'wrap',
-    //justifyContent:'center',
-    //alignItems:'center',
-
-  },
+   },
   button:{
     flex:1,
-    marginLeft:35,
-    marginRight:40,
-    margin:5,
-    height:35,
-    width:130,
+    marginLeft:size.size35,
+    marginRight:size.size40,
+    margin:size.size5,
+    height:size.size35,
+    width:size.size125,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#fff',
     borderColor:'#347474',
-    borderWidth:2,
-    borderRadius:6,
+    borderWidth:size.size2,
+    borderRadius:size.size6,
   },
 
   txt:{
@@ -65,17 +61,17 @@ const styles=StyleSheet.create({
 
   buttonActive:{
     flex:1,
-    marginLeft:35,
-    marginRight:40,
-    margin:5,
-    height:35,
-    width:130,
+    marginLeft:size.size35,
+    marginRight:size.size40,
+    margin:size.size5,
+    height:size.size35,
+    width:size.size125,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#E7F2F2',
     borderColor:'#347474',
-    borderWidth:2,
-    borderRadius:6,
+    borderWidth:size.size2,
+    borderRadius:size.size6,
 
 
   }

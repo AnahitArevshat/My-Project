@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
+import size from '../../functions/ratio';
 
 const ButtonGroup=({buttons, doSomthingAfterClick})=>{
 
@@ -32,13 +33,13 @@ const styles=StyleSheet.create({
     flexDirection:'row',
   },
   button:{
-    height:28,
-    width:101,
+    height:size.size28,
+    width:size.size105,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#347474',
     borderColor:'#347474',
-    borderRadius:4,
+    borderRadius:size.size4,
   },
   txt:{
     color:'white'
@@ -48,8 +49,8 @@ const styles=StyleSheet.create({
   },
 
   buttonActive:{
-    height:28,
-    width:101,
+    height:size.size28,
+    width:size.size105,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:'#E7F2F2',
