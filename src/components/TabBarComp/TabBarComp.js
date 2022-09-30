@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {TouchableOpacity, View, ImageBackground, StyleSheet } from "react-native";
 import Home1 from "../../assets/home1.svg";
 import BottomAppBar1 from "../../assets/BottomAppBar1.svg";

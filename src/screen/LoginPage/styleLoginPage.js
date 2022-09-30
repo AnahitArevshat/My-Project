@@ -16,6 +16,24 @@ export const mainStyle = {
     lineHeight: size.size32,
     fontWeight: '600',
     Letter: 0.25,
-    color: '#11493E'
+    color: '#11493E',
+    //fontFamily: 'Montserrat-Black',
+  },
+  OTP:{
+    backgroundColor:'#347474',justifyContent: "center",
+    alignItems: "center",
+    width:size.size120,
+    height:size.size45,
+    marginLeft:size.size35,
+    marginTop:size.size15,
+    borderTopRightRadius:70,
+    borderBottomLeftRadius:70,
+  },
+  ViewOTP:{
+    width:size.size155,
+    height:size.size45,
+    //position:'absolute',
+    //right:size.size10,
+    //top:size.size112,
   }
 }

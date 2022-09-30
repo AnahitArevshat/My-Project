@@ -40,7 +40,6 @@ const HistoryTasks=()=>{
 
   return(
     <>
-      <ScrollView>
         <View>
           <Text style={[styles.txtLeft, {marginLeft:size.size130, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>
             History tasks
@@ -108,8 +107,7 @@ const HistoryTasks=()=>{
         <View  style={{alignItems:'center'}}>
         <TaskComp el={task.tasks}/>
         </View>
-      </ScrollView>
-    </>
+       </>
   )
 }
 

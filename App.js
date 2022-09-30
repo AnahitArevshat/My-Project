@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import MainStack from '../MyProject/src/navigation/StackNavigate';
 import {store, persistor} from '../MyProject/src/reduxLogic/store';
 
+
 const App= ()  => {
 
     return (

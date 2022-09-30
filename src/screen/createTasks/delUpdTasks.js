@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {
-  Text, View, Image, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Modal, Pressable
-} from "react-native";
-import {Formik} from 'formik';
+  Text, View, TextInput, SafeAreaView, StyleSheet, TouchableOpacity} from "react-native";
 import CalendarImage from "../../assets/calendarImage.svg";
 import Chack from '../../assets/chacked.svg';
 import ButtonUpd from '../../components/buttonUpdDel/buttonUpd';
@@ -14,10 +12,10 @@ import {proj} from '../../items/proj';
 import HideTabBar from '../../functions/hideTabBar';
 import { removeTasksAction, editTasksAction, clickIdAction } from "../../tasksReducer/taskReducer";
 import size from '../../functions/ratio';
+import moment from "moment";
 
 
 const DelUpdTasks=({navigation, route})=>{
-  const [itemTask, setItemTask]=useState({});
   const [mod, setMod]=useState(false);
   const[titl, setTitl]=useState('');
   const [numb, setNumb]=useState('');
@@ -37,7 +35,9 @@ const DelUpdTasks=({navigation, route})=>{
       id:elemId.id,
       title:titl ? titl :elemId.title,
       projects:proj[numb1] ? proj[numb1].name :elemId.projects,
-      dat:numb2 && numb2 ? numb2 : elemId.dat,
+      //dat:numb2 && numb2 ? numb2 : elemId.dat,
+      //dat:numb2 && numb2 ? moment(numb2).format("YYYY-MM-DD") : moment(elemId.dat).format("YYYY-MM-DD"),
+      dat:numb2 && numb2 ? moment(new Date(numb2)).format("YYYY-MM-DD") : moment(new Date(elemId.dat)).format("YYYY-MM-DD"),
       duration:durat[numb] ? durat[numb].name : elemId.duration,
     }))
     setTitl('');
@@ -62,6 +62,7 @@ const DelUpdTasks=({navigation, route})=>{
     if(ind===3){
       setNumb2(value)
     }
+    setMod(false);
   }
 
   const clickDur=()=>{

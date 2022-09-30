@@ -36,7 +36,7 @@ const style=StyleSheet.create({
     width:size.size329,
     height:size.size45,
     flexDirection:'row',
-    borderWidth:0.5,
+    borderWidth:size.size1/2,
     paddingHorizontal:size.size15,
     alignItems:'center',
     }

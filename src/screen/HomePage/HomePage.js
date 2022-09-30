@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useMemo, useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {Text, View, SafeAreaView, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import moment from 'moment';
 import {Calendar} from 'react-native-calendars';
 import {homeStyle} from './styleHomePage';
@@ -10,42 +10,51 @@ import ButtonGroup from '../../components/butonGroup/butonGroup';
 import TaskComp from '../../components/taskComp/taskComp';
 import EventComp from '../../components/eventComp/eventComp';
 import size from '../../functions/ratio';
+import HomePageCalendar from "../HomePageCalendar/HomePageCalendar";
+import AllComponent from "../../components/allComponent/allComponent";
 
 
 const HomePage = ({navigation, route}) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [num, setNum]=useState(0);
+  const [selectDay, setSelectDay]=useState("");
 
   const task=useSelector(state=>state.tasks);
   const event=useSelector(state=>state.events);
-  const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
+  const [markedDates, setMarkedDates] = useState({});
 
-  let dat = new Date();
+  const alldata=[...task.tasks, ...event.events];
 
-  let FormatedDat=moment(dat).format('DD MMM YYYY');
+  const allsort=alldata.sort((a, b) => a.dat.localeCompare(b.dat));
 
-  const createMarkedDat=()=>{
+  let datt = new Date();
 
-    let arrayOfDates = task.tasks.dat;
+  let FormatedDat=moment(datt).format('DD MMM YYYY');
 
-    arrayOfDates.map((day) => {
-      customMarkedDates[day] = {
-        customStyles: {
-          container: {
-            backgroundColor: "red",
-          },
-          text: {
-            color: "white",
-            fontWeight: "bold",
-          },
-        },
-      };
-    });
-  }
 
   const printButtonLable=(value)=>{
        setNum(value);
   }
+
+  const onPres=()=>{
+    setShowCalendar(!showCalendar);
+    setMarkedDates({});
+    //setSelectDay('');
+  }
+
+  const searched = useMemo(() => {
+    if (selectDay) {
+           return [...allsort].filter(
+        (p) =>
+          moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
+      );
+    }
+    return allsort;
+
+  }, [selectDay, allsort]);
+
+
+
 
   return (
     <SafeAreaView style={homeStyle.container}>
@@ -69,20 +78,55 @@ const HomePage = ({navigation, route}) => {
             {FormatedDat}
           </Text>
         </View>
-        <TouchableOpacity onPress={()=>setShowCalendar(!showCalendar)}>
+        <TouchableOpacity onPress={onPres}>
           {showCalendar ? <CalendarImageOff/> : <CalendarImage/>}
         </TouchableOpacity>
       </View>
-      {showCalendar && <Calendar style={{width:size.size316, marginTop:size.size15}}
-                                 markedDates={{[curDay]:  {selected: true, selectedColor: '#347474'}}}
-                                 />}
-      {num===0 && <TaskComp  el={task.tasks} navigation={navigation}/>}
-      {num===1 && <EventComp el={event.events} />}
-      {num===2 && <View style={{alignItems:'center'}}>
-        <TaskComp el={task.tasks}/>
-        <EventComp el={event.events} />
-        </View>
+        {showCalendar && <HomePageCalendar
+        selectDay={selectDay}
+        setSelectDay={setSelectDay}
+        markedDates={markedDates}
+        setMarkedDates={setMarkedDates}/>}
+      {num===0 &&
+        <ScrollView>
+        <TaskComp  el={task.tasks} navigation={navigation}/>
+        </ScrollView>
+      }
+      {num===1 &&
+        <FlatList data={event.events} keyExtractor={(item, index)=>index} renderItem={({item})=>(
+        <EventComp item={item}/>
+        )}
+        />
+        }
+      {num===2 &&
+        <FlatList data={searched} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
+          <AllComponent item={item}/>
+        )}
+        />
       }
     </SafeAreaView>  );
 };
 export default HomePage;
+
+
+
+
+
+/*const createMarkedDat=()=>{
+
+    let arrayOfDates = task.tasks.dat;
+
+    arrayOfDates.map((day) => {
+      customMarkedDates[day] = {
+        customStyles: {
+          container: {
+            backgroundColor: "red",
+          },
+          text: {
+            color: "white",
+            fontWeight: "bold",
+          },
+        },
+      };
+    });
+  }*/

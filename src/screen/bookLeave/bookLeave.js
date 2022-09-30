@@ -8,7 +8,6 @@ import {Calendar} from 'react-native-calendars';
 import { Shadow } from 'react-native-shadow-2';
 
 import Button from '../../components/button/button';
-import ButtonSmall from '../../components/button/buttonSmall';
 import { bookType } from "../../items/bookType";
 import Chack from "../../assets/chacked.svg";
 import { addBooksAction } from "../../booksReducer/booksReducer";
@@ -34,7 +33,21 @@ const BookLeave=({navigation})=> {
   const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
   const dispatch=useDispatch();
 
-console.log(markDay);
+  useEffect(()=>{
+
+    if(mod) {
+      navigation.setOptions({
+        tabBarStyle: { display: "none" },
+      })
+    }
+    else {
+      navigation.setOptions({
+        tabBarStyle: { display: "flex" },
+      })
+    }
+  }, [mod]);
+
+  //console.log(markDay);
 
   HideTabBar(navigation);
 
@@ -141,14 +154,14 @@ console.log(markDay);
         )}
 
       </Formik>
-      {mod ? navigation.setOptions({
+      {/*mod ? navigation.setOptions({
           tabBarStyle: { display: "none" },
         })
         :
         navigation.setOptions({
           tabBarStyle: { display: "flex" },
           keyboardHidesTabBar: true
-        })
+        })*/
       }
       {mod && <BottomSheetForBook navigation={navigation} mod={mod} setMod={setMod} ind={ind} setInd={setInd} doSomething={doSomething}/>}
     </>

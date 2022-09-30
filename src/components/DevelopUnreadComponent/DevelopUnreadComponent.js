@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
+import React from 'react';
+import {useDispatch} from "react-redux";
 import {View, Text, Image, TouchableOpacity, StyleSheet, FlatList} from "react-native";
-import moment from 'moment';
 import MarkedUnread from '../../assets/markedUnread.svg';
-import { clickIdDevAction, editNotificAction } from "../../notificReducer/notificReducer";
+import { clickIdDevAction } from "../../notificReducer/notificReducer";
 import size from '../../functions/ratio';
 
-const DevelopUnreadComponent=({dat, el, navigation, mod, setMod, ind, setInd})=> {
+const DevelopUnreadComponent=({el, mod, setMod, ind, setInd})=> {
 
   const dispatch=useDispatch();
 
@@ -22,12 +21,12 @@ const DevelopUnreadComponent=({dat, el, navigation, mod, setMod, ind, setInd})=>
   }
 
   return(
-    <View style={{marginLeft:-11}}>
-      <FlatList data={el} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
-        <TouchableOpacity onPress={()=>receveElem(el[index])}>
+    <View style={{marginLeft:(size.size11*-1)}}>
+      {el.map((item, index)=>(
+        <TouchableOpacity key={index} onPress={()=>receveElem(el[index])}>
           <View style={{flexDirection:'row', width:size.size322, alignItems:'center', justifyContent:'space-between'}}>
             <View>
-          <Image style={{width:size.size32, height:size.size32, borderRadius:11, margin:7}} source={item.src}/>
+          <Image style={{width:size.size32, height:size.size32, borderRadius:size.size11, margin:size.size7}} source={item.src}/>
             </View>
             <View style={{flexDirection:'column'}}>
             <View style={{flexDirection:'row', width:size.size230}}>
@@ -51,10 +50,8 @@ const DevelopUnreadComponent=({dat, el, navigation, mod, setMod, ind, setInd})=>
             {!el[index].notif && <View><MarkedUnread/></View>}
             </View>
         </TouchableOpacity>
-      )}
-      />
-
-     </View>
+      ))}
+    </View>
 
   )
     }

@@ -1,10 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
 import HomePage from '../screen/HomePage/HomePage';
 import TabBarComp from '../components/TabBarComp/TabBarComp';
-import One from '../screen/one/one';
-import Two from '../screen/two/two';
 import CreateTasks from "../screen/createTasks/createTasks";
 import CreateEvents from '../screen/createEvents/createEvents';
 import BookLeave from '../screen/bookLeave/bookLeave';
@@ -14,6 +11,10 @@ import Notifications from "../screen/notifications/notification";
 import Activity from "../screen/Activity/Activity";
 import HistoryTasks from "../screen/HistoryTasks/HistoryTasks";
 import HistoryEvents from "../screen/HistoryEvents/HistoryEvents";
+import EventPage from "../screen/EventPage/EventPage";
+import ProjectPage from "../screen/ProjectPage/ProjectPage";
+import Projects from "../screen/Projects/Projects";
+import LogOff from "../screen/LogOff/LogOff";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,10 +23,10 @@ function TabScreens() {
     return (
       <Tab.Navigator
       tabBar={(props) => <TabBarComp {...props}/>}
-      tabBarOptions={{
+      /*tabBarOptions={{
       showLabel: false,
-      }}
-      screenOptions={{headerShown:false}}
+      }}*/
+      screenOptions={{headerShown:false, showLabel: false, tabBarHideOnKeyboard: true}}
       >
       <Tab.Screen
         name="Home"
@@ -67,6 +68,23 @@ function TabScreens() {
         <Tab.Screen
           name="HisEven"
           component={HistoryEvents}
+        />
+        <Tab.Screen
+          name="EvenPag"
+          component={EventPage}
+        />
+        <Tab.Screen
+          name="Proj"
+          component={Projects}
+        />
+
+        <Tab.Screen
+          name="ProjPag"
+          component={ProjectPage}
+        />
+        <Tab.Screen
+          name="LogOf"
+          component={LogOff}
         />
     </Tab.Navigator>
 

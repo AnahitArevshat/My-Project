@@ -25,9 +25,16 @@ export const tasks = [
     id: new Date(),
     title: "Contact",
     projects:"New City",
-    dat:'2022-09-5',
+    dat:'2022-09-05',
     duration:"30 minute",
-    color: '#F28840'}
+    color: '#F28840'},
+
+  { id: new Date(),
+    title: "Create Task",
+    projects:"Mapllo",
+    dat:'2022-09-04',
+    duration:"15 minute",
+    color:'#FF8189'},
 ];
 
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Keyboard } from "react-native";
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import moment from 'moment';
 import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
@@ -13,6 +13,7 @@ import InputTasck from "../input/inputTasck";
 import size from '../../functions/ratio';
 
 const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation}) => {
+
   let dayNow=new Date();
   let currentDay=moment(dayNow).format('MMMM DD');
   const [desc, setDesc]=useState('');
@@ -24,6 +25,8 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
     numDuration:'',
   } );
   const height = Dimensions.get("window").height;
+
+
 
   // ref
   const bottomSheetRef = useRef(null);
@@ -43,6 +46,7 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
     //bottomSheetRef.current.close();
     setMod(false);
   }
+
 
   const greatClosePress=()=>{
     bottomSheetRef.current.close();

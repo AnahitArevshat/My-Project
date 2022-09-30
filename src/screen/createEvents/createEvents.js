@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from "react-redux";
 import {
-  Text, View, Image, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Keyboard
+  Text, View, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Keyboard
 } from "react-native";
 import {Formik} from 'formik';
 import CalendarImage from "../../assets/calendarImage.svg";
@@ -12,14 +12,14 @@ import Button from '../../components/button/button';
 import BottomSheetWindow from '../../components/bootomSheetWindow/bootomSheetWindow';
 import {eventType} from'../../items/eventType';
 import {eventOrgnizer} from '../../items/eventOrgnizer';
-import {eventParticip, eventSubParticip} from '../../items/eventParticip';
+import {eventSubParticip} from '../../items/eventParticip';
 import {eventRoom} from '../../items/eventRoom';
 import {durat} from '../../items/durat';
 import {color} from '../../items/events';
 import {addEventsAction} from '../../eventsReducer/eventsReducer';
 import HideTabBar from '../../functions/hideTabBar';
 import size from '../../functions/ratio';
-
+import moment from "moment";
 
 
 const CreateEvents=({navigation})=> {
@@ -42,10 +42,25 @@ const CreateEvents=({navigation})=> {
   const hamar=useSelector((state)=>state.events.hamar);
 
   const dispatch=useDispatch();
-  let i = Math.floor((Math.random() * 3) );
-
 
   HideTabBar(navigation);
+
+  useEffect(()=>{
+
+    if(mod) {
+     navigation.setOptions({
+        tabBarStyle: { display: "none" },
+      })
+    }
+    else {
+      navigation.setOptions({
+        tabBarStyle: { display: "flex" },
+      })
+    }
+  }, [mod]);
+
+
+  let i = Math.floor((Math.random() * 3) );
 
 
   const doSomething=(value)=>{
@@ -111,7 +126,6 @@ const CreateEvents=({navigation})=> {
     setMod(!mod);
     }
 
-
   const createEvent=(values)=>{
     const newItem = {
       ...itemEvents,
@@ -121,7 +135,7 @@ const CreateEvents=({navigation})=> {
       orgnizer:values.orgnizer,
       participators:values.participators,
       room:values.room,
-      dat:values.dat,
+      dat:moment(new Date(values.dat)).format("YYYY-MM-DD"),
       adress:'1 Alek Manukyan, Gyumri',
       duration:values.duration,
       descript:values.descript,
@@ -138,7 +152,6 @@ const CreateEvents=({navigation})=> {
       eventAdress:'',
       eventDate:'',
       eventDuration:''});
-      //navigation.navigate('Home');
       setInd(8);
       setMod(true);
   }
@@ -248,7 +261,7 @@ const CreateEvents=({navigation})=> {
               value={props.values.descript}
               name='Description'multiline
               onChangeText={props.handleChange('descript')}
-             />
+               />
           </View>
           <View style={{marginTop:(size.size20*-1)}}>
             <Button title='Create' onPress={props.handleSubmit}/>
@@ -258,15 +271,7 @@ const CreateEvents=({navigation})=> {
       )}
 
     </Formik>
-      {mod ? navigation.setOptions({
-        tabBarStyle: { display: "none" },
-        },)
-        :
-        navigation.setOptions({
-          tabBarStyle: { display: "flex" },
-       })
-      }
-      {mod && <BottomSheetWindow navigation={navigation} mod={mod} setMod={setMod} ind={ind} doSomething={doSomething}/>}
+     {mod && <BottomSheetWindow navigation={navigation} mod={mod} setMod={setMod} ind={ind} doSomething={doSomething}/>}
       </>
   );
 }

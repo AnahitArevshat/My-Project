@@ -17,8 +17,8 @@ const TaskComp=({dat, el, navigation})=>{
 
   return (
     <View style={styles.contain}>
-        <FlatList data={el} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
-          <TouchableOpacity onPress={()=>receveId(el[index])}>
+      {el.map((item, index)=>(
+          <TouchableOpacity key={index} onPress={()=>receveId(el[index])}>
           <View style={{flexDirection:'row', alignItems:'center', backgroundColor:'#E7F2F2', marginBottom:size.size5}}>
            <View>
             <ChackIcon />
@@ -36,9 +36,7 @@ const TaskComp=({dat, el, navigation})=>{
 
         </View>
           </TouchableOpacity>
-        )}
-       />
-
+      ))}
     </View>)
 }
 
@@ -67,3 +65,27 @@ const styles=StyleSheet.create({
 export default TaskComp;
 
 
+/*
+<FlatList data={el} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
+          <TouchableOpacity onPress={()=>receveId(el[index])}>
+          <View style={{flexDirection:'row', alignItems:'center', backgroundColor:'#E7F2F2', marginBottom:size.size5}}>
+           <View>
+            <ChackIcon />
+            </View>
+          <View style={{flex:1}}>
+            <Text style={styles.txt}>{item.title}</Text>
+              <View style={{flexDirection:'row'}}>
+            <Text>{moment(item.dat).format('MMM DD, YYYY')}|</Text>
+            <Text>{item.duration}</Text>
+              </View>
+          </View>
+            <View style={[styles.proj, {backgroundColor:item.color}]}>
+            <Text style={{color:'#fff', fontSize:size.size11}}>{item.projects}</Text>
+            </View>
+
+        </View>
+          </TouchableOpacity>
+        )}
+       />
+
+ */

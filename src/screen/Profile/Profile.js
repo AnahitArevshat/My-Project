@@ -25,12 +25,12 @@ const Profile=({navigation})=>{
           <Text style={styles.txtLeft}>History events</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity  style={styles.emailContainer}>
+      <TouchableOpacity  style={styles.emailContainer} onPress={()=> navigation.navigate('Proj')}>
         <View style={{width: '80%'}}>
           <Text style={styles.txtLeft}>Projects</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity  style={styles.emailContainer}>
+      <TouchableOpacity  style={styles.emailContainer} onPress={()=> navigation.navigate('Login')}>
         <View style={{width: '80%'}}>
           <Text style={styles.txtLeft}>Log out</Text>
         </View>

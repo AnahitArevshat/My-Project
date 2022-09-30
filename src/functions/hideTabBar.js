@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Keyboard } from "react-native";
 
 function HideTabBar(navigation) {

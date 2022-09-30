@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import { Text, View, Image, StyleSheet, TouchableOpacity, FlatList, ScrollView } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import ButtonGroupeForNotif from '../../components/butonGroup/buttonGroupeForNotif';
 import DevelopUnreadComponent from '../../components/DevelopUnreadComponent/DevelopUnreadComponent';
 import Notif from '../../assets/notific.svg';
@@ -10,7 +10,7 @@ import size from '../../functions/ratio';
 
 
 const Notifications=({navigation})=>{
-  const [number, setNumber]=useState(1);
+  const [number, setNumber]=useState(0);
   const develop=useSelector(state=>state.developers.developers);
   const dispatch=useDispatch();
   const [mod, setMod]=useState(false);
@@ -27,11 +27,26 @@ const Notifications=({navigation})=>{
    ));
   }
 
+
+  useEffect(()=>{
+
+    if(mod) {
+      navigation.setOptions({
+        tabBarStyle: { display: "none" },
+      })
+    }
+    else {
+      navigation.setOptions({
+        tabBarStyle: { display: "flex" },
+      })
+    }
+  }, [mod]);
+
+
   return(
     <>
-    <ScrollView>
     <View style={{alignItems:'center'}}>
-    <View style={{marginTop:size.size50}}>
+    <View style={{marginTop:size.size40}}>
     <Text style={styles.txt}>Notifications</Text>
     </View>
     <View style={{flexDirection: 'row', width:size.size340, marginTop:size.size30, marginLeft:size.size25}}>
@@ -44,7 +59,9 @@ const Notifications=({navigation})=>{
       {number===1 && <Text style={styles.txt1}>Mark all as read</Text>}
     </TouchableOpacity>
   </View>
-      <View style={{marginTop:size.size30, marginLeft:size.size40}}>
+    <ScrollView>
+
+      <View style={{marginTop:size.size10, marginLeft:size.size40}}>
         {number===1 && develop.filter((item)=>item.notif===false).length===0
           &&
           <View style={{alignItems:'center', marginTop:size.size150, marginRight:size.size40}}>
@@ -56,26 +73,18 @@ const Notifications=({navigation})=>{
             <Notif/>
           </View>
         }
+
         {number===1
           ?
           <DevelopUnreadComponent el={develop.filter((item)=>item.notif===false)} mod={mod} setMod={setMod} ind={ind} setInd={setInd}/>
           :
           <DevelopUnreadComponent el={develop.filter((item)=>item.notif===true)} mod={mod} setMod={setMod} ind={ind} setInd={setInd}/>}
-
       </View>
+    </ScrollView>
 
-  </ScrollView>
-      {mod ? navigation.setOptions({
-          tabBarStyle: { display: "none" },
-        })
-        :
-        navigation.setOptions({
-          tabBarStyle: { display: "flex" },
-          keyboardHidesTabBar: true
-        })
-      }
       {mod && <BottomSheetForNotif ind={ind} mod={mod} setMod={setMod} number={number}/>}
   </>
+
   )
 }
 
@@ -96,6 +105,7 @@ const styles=StyleSheet.create({
     lineHeight:size.size15,
     color: '#347474',
     textAlign:'right',
-    marginRight:(size.size50*-1)
+    marginRight:(size.size50*-1),
+    marginBottom:size.size20
   }
 })

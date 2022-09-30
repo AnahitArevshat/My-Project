@@ -1,7 +1,14 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions} from "react-native";
-import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
+import BottomSheet, {BottomSheetView, BottomSheetTextInput} from '@gorhom/bottom-sheet';
 import ButtonForNotif from "../buttonForNotif/buttonForNotif";
 import ButtonForNotifDel from "../buttonForNotif/buttonForNotifDel";
 import Clos from '../../assets/clos.svg';
@@ -10,13 +17,12 @@ import size from '../../functions/ratio';
 
 
 const BottomSheetForNotif = ({doSomething, ind, mod, setMod, setInd, number}) => {
-  const [desc, setDesc]=useState('');
 
   // ref
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ['100%', '50%'], []);
+  const snapPoints = useMemo(() => ['100%', '45%'], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -26,6 +32,7 @@ const BottomSheetForNotif = ({doSomething, ind, mod, setMod, setInd, number}) =>
 
   const dev=useSelector(state=>state.developers.devId);
   const dispatch=useDispatch();
+
 
   const handleClosePress = () => {
     if(number===1) {
@@ -37,17 +44,14 @@ const BottomSheetForNotif = ({doSomething, ind, mod, setMod, setInd, number}) =>
     setMod(false);
   }
 
-  const HandleClick=(el, id)=>{
-    doSomething(id);
-    setMod(false);
-  }
+
 var children;
 
   if(ind===1){
  children=<BottomSheetView >
-            <View style={{width:'100%', height:'60%'}}>
+           <View style={{width:'100%', height:'60%'}}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:'90%', marginTop:(size.size2*-1)}}/>
+                <Clos style={{marginLeft:'90%', marginTop:(size.size1*-1)}}/>
               </TouchableOpacity>
               <View style={{alignItems:'center'}}>
               <Text style={styles.txt}>Work Remotely Request</Text>
@@ -79,13 +83,13 @@ var children;
                 </Text>
                 </View>
             </View>
-            </BottomSheetView>
+       </BottomSheetView>
   }
   else {
     children=<BottomSheetView >
       <View style={{width:'100%', height:'60%'}}>
         <TouchableOpacity onPress={handleClosePress}>
-          <Clos style={{marginLeft:'90%', marginTop:(size.size2*-1)}}/>
+          <Clos style={{marginLeft:'90%', marginTop:(size.size1*-1)}}/>
         </TouchableOpacity>
         <View style={{alignItems:'center'}}>
           <Text style={styles.txt}>Work Remotely Request</Text>
@@ -107,9 +111,9 @@ var children;
           </View>
         </View>
         <View style={{marginLeft:size.size15, marginTop:size.size15}}>
-          <Text style={styles.txt1}>Comment:</Text>
+          <Text style={styles.txt1}>Description:</Text>
         </View>
-        <View style={{marginLeft:size.size15, marginTop:size.size15, marginRight:size.size15}}>
+        <View style={{marginLeft:size.size15, marginTop:size.size13, marginRight:size.size15}}>
           <Text style={[styles.txt1, { textAlign:'justify' }]}>
             Lorem Ipsum is simply dummy text of the printing and
             typesetting industry. Lorem Ipsum has been the industry's
@@ -117,10 +121,13 @@ var children;
           </Text>
         </View>
       </View>
-      <View style={styles.inpText}>
-      <TextInput placeholder='Add comment'/>
-      </View>
-      <View style={{flexDirection:'row', marginLeft:size.size80}}>
+       <BottomSheetTextInput
+          placeholder='Add comment'
+          style={styles.posabs}
+          //onBlur={()=>setMarTop(false)}
+          //onFocus={()=>setMarTop(true)}
+        />
+      <View style={{flexDirection:'row', marginLeft:size.size80, position:'absolute', top:size.size240, left:size.size50}}>
       <ButtonForNotif title='Accept'/>
       <ButtonForNotifDel title='Cancel'/>
       </View>
@@ -131,6 +138,7 @@ var children;
             ref={bottomSheetRef}
             index={1}
             snapPoints={snapPoints}
+            keyboardBehavior="fillParent"
             enablePanDownToClose={true}
             onChange={handleSheetChanges}
             enabledGestureInteraction={true}
@@ -145,8 +153,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     backgroundColor: 'grey',
-    marginRight:'10%',
-    marginLeft:'10%'
+    //marginRight:'10%',
+   // marginLeft:'10%'
   },
 
   txt:{
@@ -171,16 +179,18 @@ const styles = StyleSheet.create({
     letterSpacing:0.25,
     color: '#347474'
 },
-  inpText:{
-    marginLeft:size.size15,
-    marginTop:size.size20,
-    width:size.size274,
-    height: size.size40,
-    border:size.size1,
-    borderWidth:size.size2,
-    borderRadius:size.size10,
-    borderColor:'#F5F5F5'
-  }
+
+    posabs: {
+      width:size.size325,
+      height: size.size40,
+      border:size.size1,
+      borderWidth:size.size2,
+      borderRadius:size.size10,
+      borderColor:'#F5F5F5',
+      position:'absolute',
+      top:size.size215,
+      left:size.size15,
+      }
 
 });
 

@@ -9,7 +9,6 @@ import Input from '../../components/input/input';
 import Button from '../../components/button/button';
 import size from '../../functions/ratio';
 
-
 const ForgotPassword=({navigation})=>{
   const loadBack=()=>{
     navigation.goBack();

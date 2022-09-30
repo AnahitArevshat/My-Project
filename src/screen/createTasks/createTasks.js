@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from "react-redux";
 import {
-   Text, View, Image, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Modal, Pressable
-} from "react-native";
+   Text, View, TextInput, SafeAreaView, StyleSheet, TouchableOpacity} from "react-native";
 import {Formik} from 'formik';
 import CalendarImage from "../../assets/calendarImage.svg";
 import Chack from '../../assets/chacked.svg';
@@ -15,9 +14,9 @@ import {color} from '../../items/tasks';
 import {addTaskAction} from '../../tasksReducer/taskReducer';
 import HideTabBar from '../../functions/hideTabBar';
 import size from '../../functions/ratio';
+import moment from "moment/moment";
 
 const CreateTasks=({navigation, route})=>{
-  const [showCalendar, setShowCalendar] = useState(false);
   const [itemTask, setItemTask]=useState({});
   const [mod, setMod]=useState(false);
   //const navigation=useNavigation();
@@ -25,7 +24,6 @@ const CreateTasks=({navigation, route})=>{
   const [numb1, setNumb1]=useState('');
   const [numb2, setNumb2]=useState('');
   const [ind, setInd]=useState(0);
-  const task=useSelector(state=>state.tasks.tasks);
   const dispatch=useDispatch();
 
   let i = Math.floor((Math.random() * 3) );
@@ -38,17 +36,16 @@ const CreateTasks=({navigation, route})=>{
 
 
   const createTask=(values)=>{
-      const newItem = {
+    const newItem = {
       ...itemTask,
       id: Date.now(),
       title:values.title,
       projects:values.projects,
-      dat:values.dat,
+      dat:moment(new Date(values.dat)).format("YYYY-MM-DD"),
       duration:values.duration,
       color:color[i],
       };
 
-    //console.log(newItem);
     dispatch(addTaskAction(newItem));
     setNumb('');
     setNumb1('');
@@ -64,8 +61,9 @@ const CreateTasks=({navigation, route})=>{
       setNumb1(value);
     }
     if(ind===3){
-      setNumb2(value)
+      setNumb2(value);
     }
+    setMod(false);
 }
 
   const clickDur=()=>{
@@ -98,7 +96,6 @@ const CreateTasks=({navigation, route})=>{
             <View style={styles.commonInput}>
               <TextInput placeholder='Title*' value={props.values.title} name='Title*'onChangeText={props.handleChange('title')}/>
             {/*<InputTasck value={props.values.title} name='Title*'onChangeText={props.handleChange('title')}/>*/}
-              {/*<InputTasck value={props.values.title} name='Title*'onChange={props.handleChange('title')}/>*/}
             </View>
           </View>
           <TouchableOpacity onPress={clickProg} style={styles.emailContainer}>

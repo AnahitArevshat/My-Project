@@ -1,7 +1,18 @@
 import React from 'react';
 import {
   Text, View, StyleSheet, ScrollView} from "react-native";
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryGroup, VictoryAxis, VictoryStack, VictoryLine, VictoryScatter} from "victory-native";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryStack,
+  VictoryLine,
+  VictoryScatter,
+  VictoryLegend,
+  VictoryLabel,
+} from "victory-native";
+import { Shadow } from 'react-native-shadow-2';
+
 import Grafik from '../../assets/grafik.svg';
 import size from '../../functions/ratio';
 
@@ -35,7 +46,7 @@ const Activity=()=>{
   return (
     <>
       <ScrollView>
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Text style={styles.txt}>My Activities</Text>
       <Text style={styles.txtLeft}>Week tasks</Text>
       <View style={{marginTop:(size.size70*-1)}}>
@@ -58,9 +69,15 @@ const Activity=()=>{
       </View>
     </View>
 
-      <View style={{width:size.size325, height:size.size225, marginBottom:size.size250}}>
-        <Text style={[styles.txtLeft, {marginLeft:size.size25, marginRight: size.size100}]}>Progress tasks</Text>
-        <Grafik style={{marginLeft:size.size25}}/>
+      <View style={{width:size.size340,
+        height:size.size225,
+        marginBottom:size.size250,
+        marginLeft:size.size17,
+        }}>
+        <Shadow style={{width:size.size340, height:size.size350, backgroundColor:'white'}}>
+        <Text style={[styles.txtLeft, {marginLeft:size.size15, marginRight: size.size100}]}>Progress tasks</Text>
+        <Grafik style={{marginLeft:size.size15}}/>
+
         <VictoryChart
           minDomain={{ x:0.8, y: 0}}
           domain={{y: [25, 29]}}
@@ -117,14 +134,19 @@ const Activity=()=>{
           />
 
         </VictoryChart>
+        </Shadow>
       </View>
 
-        <View style={{width:size.size325, height:size.size287, marginTop:(size.size140*-1)}}>
-          <Text style={[styles.txtLeft, {marginLeft:size.size25, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>Annual Leave</Text>
+        <View style={{width:size.size340, height:size.size450, marginTop:(size.size135*-1), marginLeft:size.size17}}>
+          <Text style={[styles.txtLeft, {marginLeft:size.size10, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>Annual Leave</Text>
+          <Shadow style={{width:size.size340, height:size.size370, backgroundColor:'white'}}>
+
           <VictoryChart
-            padding={{top: size.size80, bottom: size.size90, left: size.size40, right: size.size40}}
+            height={size.size400}
+            padding={{top: size.size70, bottom: size.size220, left: size.size20, right: size.size50}}
             domen={{y:[0,20]}}
-          >
+           >
+
             <VictoryAxis
               tickFormat={(month) => `${month}`.substring(0,1)}
               style={{
@@ -167,10 +189,58 @@ const Activity=()=>{
                 cornerRadius={{bottomLeft:(size.size4), bottomRight:(size.size4), topLeft:(size.size4), topRight:(size.size4)}}
               />
             </VictoryStack>
+            <VictoryLabel
+              textAnchor="middle"
+              style={{ fontSize: size.size15 }}
+              x={size.size305}
+              y={size.size240}
+              text='12 day'
+            />
+            <VictoryLabel
+              textAnchor="middle"
+              style={{ fontSize: size.size15 }}
+              x={size.size305}
+              y={size.size270}
+              text='3 day'
+            />
+            <VictoryLabel
+              textAnchor="middle"
+              style={{ fontSize: size.size15 }}
+              x={size.size305}
+              y={size.size300}
+              text='1h 15min'
+            />
+            <VictoryLabel
+              textAnchor="middle"
+              style={{ fontSize: size.size15 }}
+              x={size.size305}
+              y={size.size330}
+              text='5 day'
+            />
+            <VictoryLegend
+                     x={size.size5} y={size.size220}
+                           orientation="vertical"
+                           rowGutter={size.size3}
+                     data={[
+                             { name: "Vacation", symbol: { fill: "#92BEFA" } },
+                             { name: "Day Offs", symbol: { fill: "#EF988F" } },
+                             { name: "Hours Leaved", symbol: { fill: "#83B7AD" } },
+                             { name: "Work remotaly", symbol: { fill: "#F5CC93" } }
+                           ]}
+                            style={{
+                                //title: {fontSize: 10},
+                                 //data: {fontSize: 15},
+                                labels: { fontSize: 15},
+                               }}
+                            height={size.size180}
+                          />
+
           </VictoryChart>
+          </Shadow>
+
         </View>
       </ScrollView>
-</>
+    </>
   );
 }
  export default Activity;
@@ -179,7 +249,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
- },
+   },
   txt: {
     marginTop:size.size20,
     fontSize:size.size16,
@@ -189,7 +259,7 @@ const styles = StyleSheet.create({
     color:'#1B3131'
   },
   txtLeft:{
-    marginRight:size.size250,
+    marginRight:size.size240,
     marginTop:size.size20,
     fontSize:size.size16,
     fontWeight:'600',

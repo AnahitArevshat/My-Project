@@ -2,14 +2,14 @@ import React, {useState, useMemo} from 'react';
 import {
   StyleSheet, Text, View,ScrollView, TextInput, TouchableOpacity} from 'react-native'
 import { VictoryPie, VictoryLabel, VictoryLegend} from "victory-native";
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 import { Calendar } from "react-native-calendars";
 import Svg from 'react-native-svg';
 import { Shadow } from 'react-native-shadow-2';
 import moment from 'moment';
 import size from "../../functions/ratio";
 import CalendarImage from '../../assets/calendarImage.svg';
-import EventComp from "../../components/eventComp/eventComp";
+import ProfileEvents from "../../components/ProfileEvents/ProfileEvents";
 import HideTabBar from '../../functions/hideTabBar';
 
 
@@ -23,36 +23,48 @@ const HistoryEvents=({navigation})=>{
 
   const searched = useMemo(() => {
     if (searchField) {
-      setSelectDay('');
-      return [...event].filter(
+      if(selectDay){
+        return [...event].filter(
+          (p) =>
+            p.type.toLowerCase().includes(searchField.toLowerCase()) &&
+            moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
+        );
+      }
+     return [...event].filter(
         (p) =>
           p.type.toLowerCase().includes(searchField.toLowerCase())
       );
     }
-
     if (selectDay) {
-
-      return [...event].filter(
+      if(searchField){
+        return [...event].filter(
+          (p) =>
+            p.type.toLowerCase().includes(searchField.toLowerCase()) &&
+            moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
+        );
+      }
+     return [...event].filter(
         (p) =>
           moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
       );
     }
     return event;
+
   }, [searchField, selectDay, event]);
+
 
   const onSelDay=(day)=>{
     setSelectDay(day.dateString);
     setShowItem(false);
   }
-  const onFoc=()=>{
-    setSelectDay('');
-    setSearchField('');
-  }
 
+  const onPres=()=>{
+    setShowItem(!showItem);
+    setSelectDay('');
+  }
 
   return(
     <>
-      <ScrollView>
         <View>
           <Text style={[styles.txtLeft, {marginLeft:size.size130, marginRight: size.size100, marginBottom:size.size25}]}>
             History events
@@ -128,7 +140,7 @@ const HistoryEvents=({navigation})=>{
               text='Item'
             />
 
-            <VictoryLegend x={size.size390} y={size.size120}
+            <VictoryLegend x={size.size390} y={size.size110}
                  orientation="vertical"
                  rowGutter={size.size15}
                  data={[
@@ -138,16 +150,17 @@ const HistoryEvents=({navigation})=>{
                  { name: "Teambulding", symbol: { fill: "#EF988F" } }
                   ]}
                 standalone={false}
+                           style={{
+                           labels: { fontSize: 15},
+                           }}
             />
           </Svg>
         </View>
         <View style={styles.inputContaner}>
         <TextInput placeholder='Search history'
-                   value={searchField ? searchField : selectDay}
-                   onChangeText={(text)=>setSearchField(text)}
-                    onFoc={onFoc}
+            onChangeText={(text)=>setSearchField(text)}
         />
-          <TouchableOpacity onPress={()=>setShowItem(!showItem)}>
+          <TouchableOpacity onPress={onPres}>
         <CalendarImage/>
           </TouchableOpacity>
         </View>
@@ -158,10 +171,10 @@ const HistoryEvents=({navigation})=>{
           </Shadow>
           </View>
         }
+      <ScrollView>
         <View  style={{alignItems:'center'}}>
-        <EventComp el={searched} />
+        <ProfileEvents el={searched} navigation={navigation}/>
         </View>
-
       </ScrollView>
     </>
   )

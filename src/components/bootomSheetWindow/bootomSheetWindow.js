@@ -27,7 +27,6 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
     numDuration:'',
     } );
   const hamar=useSelector((state)=>state.events.hamar);
-  console.log(hamar);
 
  // ref
   const bottomSheetRef = useRef(null);
@@ -47,7 +46,7 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
     }
 
   const greatClosePress=()=>{
-    bottomSheetRef.current.close();
+    //bottomSheetRef.current.close();
     setMod(false);
     navigation.navigate('Home');
   }
