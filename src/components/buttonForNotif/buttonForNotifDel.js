@@ -9,7 +9,7 @@ const ButtonForNotifDel=({title, onPress=()=>{}})=>{
       onPress={onPress}
       style={styles.stybutDel}
     >
-      <Text style={{color:'white', fontWeight:'600', fontSize:size.size14, lineHeight:size.size16}}>{title}</Text>
+      <Text style={styles.txt}>{title}</Text>
     </TouchableOpacity>)
 }
 export default ButtonForNotifDel;
@@ -23,5 +23,11 @@ const styles = StyleSheet.create({
     borderRadius:size.size4,
     justifyContent: "center",
     alignItems: "center"
+  },
+  txt:{
+    color:'white',
+    fontWeight:'600',
+    fontSize:size.size14,
+    lineHeight:size.size16
   }
 })

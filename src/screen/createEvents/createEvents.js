@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector, useDispatch} from "react-redux";
-import {
-  Text, View, TextInput, SafeAreaView, StyleSheet, TouchableOpacity,Keyboard
-} from "react-native";
+import {Text, View, TextInput, SafeAreaView, TouchableOpacity} from "react-native";
 import {Formik} from 'formik';
 import CalendarImage from "../../assets/calendarImage.svg";
 import Chack from '../../assets/chacked.svg';
 import Adres from '../../assets/address.svg';
 import Button from '../../components/button/button';
 import BottomSheetWindow from '../../components/bootomSheetWindow/bootomSheetWindow';
+import moment from "moment";
 import {eventType} from'../../items/eventType';
 import {eventOrgnizer} from '../../items/eventOrgnizer';
 import {eventSubParticip} from '../../items/eventParticip';
 import {eventRoom} from '../../items/eventRoom';
 import {durat} from '../../items/durat';
 import {color} from '../../items/events';
+import {EventsStyle} from '../createEvents/styleEvents';
 import {addEventsAction} from '../../eventsReducer/eventsReducer';
 import HideTabBar from '../../functions/hideTabBar';
 import size from '../../functions/ratio';
-import moment from "moment";
 
 
 const CreateEvents=({navigation})=> {
@@ -161,27 +159,27 @@ const CreateEvents=({navigation})=> {
     <Formik initialValues={{type:'',title:'', orgnizer:'', participators:'', room:'', adres:'', dat:'', duration:'', descript:''}}
             onSubmit={(values, action)=>{createEvent(values); action.resetForm();}}>
       {(props)=>(
-        <SafeAreaView style={styles.conteiner}>
+        <SafeAreaView style={EventsStyle.conteiner}>
 
-          <View style={{width:size.size158, height:size.size24}}>
-            <Text style={{fontSize:size.size16, fontWeight:'500', lineHeight:size.size24, letterSpacing:0.25, color: '#1B3131'}}>Create New Events</Text>
+          <View style={EventsStyle.viewCNE}>
+            <Text style={EventsStyle.txtCNE}>Create New Events</Text>
           </View>
-          <View style={{flexDirection:'row', marginRight:235, marginTop:10}}>
+          <View style={EventsStyle.viewCET}>
           <Text style={{textAlign:'left'}}>Choose event type*</Text>
           </View>
-          <TouchableOpacity onPress={(clickType)} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={[styles.titl, {marginLeft:size.size12}]}>Type</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity onPress={(clickType)} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={[EventsStyle.titl, {marginLeft:size.size12}]}>Type</Text>
+              <View style={EventsStyle.viewTitle}>
                 <Text style={{fontWeight:'bold'}}>{eventNum.eventType!=='' ? props.values.type=eventType[eventNum.eventType].name : ''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <View style={styles.emailContainer}>
-            <View style={styles.commonInput}>
+          <View style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.commonInput}>
               <TextInput placeholder='Event Title*'
                  value={props.values.title}
                  name='EventsTitle'
@@ -189,73 +187,73 @@ const CreateEvents=({navigation})=> {
                />
             </View>
           </View>
-          <TouchableOpacity onPress={clickOrgnizer} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size12}}>Orgnizer</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity onPress={clickOrgnizer} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtTitle}>Orgnizer</Text>
+              <View style={EventsStyle.viewTitle}>
                 <Text style={{fontWeight:'bold'}}>{eventNum.eventOrgnizer!=='' ? props.values.orgnizer=eventOrgnizer[eventNum.eventOrgnizer].name : ''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickParticip} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size12}}>Participators*</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity onPress={clickParticip} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtTitle}>Participators*</Text>
+              <View style={EventsStyle.viewTitle}>
                 <Text style={{fontWeight:'bold'}}>{eventNum.eventParticip!=='' ? props.values.participators=eventSubParticip[eventNum.eventParticip].name : ''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickRoom} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size12}}>Room</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity onPress={clickRoom} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtTitle}>Room</Text>
+              <View style={EventsStyle.viewTitle}>
                 <Text style={{fontWeight:'bold'}}>{eventNum.eventRoom!=='' ? props.values.room=eventRoom[eventNum.eventRoom].name : ''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size12}}>1 Alek Manukyan, Gyumri</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtTitle}>1 Alek Manukyan, Gyumri</Text>
+              <View style={EventsStyle.viewTitle}>
                 <Text style={{fontWeight:'bold'}}>{props.values.adres=''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Adres/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickDat} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size12}}>Date</Text>
-              <View style={{alignItems:'center', marginLeft:size.size80}}>
+          <TouchableOpacity onPress={clickDat} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtTitle}>Date</Text>
+              <View style={EventsStyle.viewDat}>
                 <Text style={{fontWeight:'bold'}}>{props.values.dat=eventNum.eventDate}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <CalendarImage/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickDur} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center' }}>
-              <Text style={{fontSize:size.size13, color:'light',marginLeft:size.size10}}>Duration</Text>
-              <View style={{alignItems:'center', marginLeft:size.size60}}>
+          <TouchableOpacity onPress={clickDur} style={EventsStyle.emailContainer}>
+            <View style={EventsStyle.viewType}>
+              <Text style={EventsStyle.txtDur}>Duration</Text>
+              <View style={EventsStyle.viewDur}>
                 <Text style={{fontWeight:'bold'}}>{eventNum.eventDuration!=='' ? props.values.duration=durat[eventNum.eventDuration].name : ''}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={EventsStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <View style={styles.mult}>
+          <View style={EventsStyle.mult}>
             <TextInput
               placeholder='Description'
               value={props.values.descript}
@@ -279,38 +277,3 @@ const CreateEvents=({navigation})=> {
 export default CreateEvents;
 
 
-const styles=StyleSheet.create({
-  conteiner:{
-    backgroundColor: '#FFFFFF;',
-    height:`100%`,
-    alignItems: 'center',
-    marginTop:size.size5
-  },
-  viewcont:{
-    flexDirection: 'row',
-    width: size.size313,
-    marginTop: size.size35,
-    borderBottomWidth:0.5,
-    borderBottomColor:'#E3E3E3',
-  },
-  txt:{
-    textAlign:'center',
-  },
-  emailContainer: {
-    flexDirection: "row",
-    height: size.size40,
-    marginTop: size.size15,
-    borderBottomWidth:0.5,
-    borderBottomColor:'#E3E3E3',
-  },
-  chackIcon: {
-    alignContent: 'center',
-    justifyContent:'center'
-  },
-  commonInput: {
-    width: '90%'
-  },
-  titl:{fontSize:size.size14, fontWeight:'400', lineHeight: 14.63, marginLeft:size.size14},
-  mult:{width:'92%', height: size.size75, marginTop: size.size20, marginRight:size.size10,
-    marginLeft:size.size10, borderWidth:size.size1,borderColor: '#E3E3E3', borderRadius:size.size6}
-})

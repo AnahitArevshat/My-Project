@@ -17,12 +17,12 @@ const ForgotPassword=({navigation})=>{
   return(
     <SafeAreaView style={secondStyle.container}>
       <Image
-        style={{width: size.size192, height: size.size218, marginBottom:size.size60}}
+        style={secondStyle.imgSec}
         source={require("../../image/Group565.jpg")}
       />
       <Text style={secondStyle.txt}>Forgot password</Text>
-      <View style={{width:size.size328, height:size.size32}}>
-        <Text style={{textAlign:'left', marginTop:size.size5, marginBottom:(size.size5 * -1)}}>Enter your email address and we'll email you your new password
+      <View style={secondStyle.viewNewPass}>
+        <Text style={secondStyle.txtNewPass}>Enter your email address and we'll email you your new password
         </Text>
       </View>
       <View style={{marginTop:size.size10}}>
@@ -32,7 +32,7 @@ const ForgotPassword=({navigation})=>{
         />
         <Button title='Send'/>
         <TouchableOpacity onPress={loadBack} >
-          <Text style={{textAlign:'right', marginTop:size.size10}}>Back To <Text style={{color: '#11493E'}}>Login</Text></Text>
+          <Text style={secondStyle.txtLogin}>Back To <Text style={{color: '#11493E'}}>Login</Text></Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

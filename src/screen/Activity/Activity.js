@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Text, View, StyleSheet, ScrollView} from "react-native";
+  Text, View, ScrollView} from "react-native";
 import {
   VictoryBar,
   VictoryChart,
@@ -12,8 +12,8 @@ import {
   VictoryLabel,
 } from "victory-native";
 import { Shadow } from 'react-native-shadow-2';
-
 import Grafik from '../../assets/grafik.svg';
+import {ActivityStyle} from '../Activity/styleActivity';
 import size from '../../functions/ratio';
 
 const data = [
@@ -46,9 +46,9 @@ const Activity=()=>{
   return (
     <>
       <ScrollView>
-      <View style={styles.container}>
-      <Text style={styles.txt}>My Activities</Text>
-      <Text style={styles.txtLeft}>Week tasks</Text>
+      <View style={ActivityStyle.container}>
+      <Text style={ActivityStyle.txt}>My Activities</Text>
+      <Text style={ActivityStyle.txtLeft}>Week tasks</Text>
       <View style={{marginTop:(size.size70*-1)}}>
       <VictoryChart
         padding={{top: size.size100, bottom: size.size90, left: size.size65, right: size.size75}}
@@ -69,13 +69,9 @@ const Activity=()=>{
       </View>
     </View>
 
-      <View style={{width:size.size340,
-        height:size.size225,
-        marginBottom:size.size250,
-        marginLeft:size.size17,
-        }}>
+      <View style={ActivityStyle.chart}>
         <Shadow style={{width:size.size340, height:size.size350, backgroundColor:'white'}}>
-        <Text style={[styles.txtLeft, {marginLeft:size.size15, marginRight: size.size100}]}>Progress tasks</Text>
+        <Text style={[ActivityStyle.txtLeft, {marginLeft:size.size15, marginRight: size.size100}]}>Progress tasks</Text>
         <Grafik style={{marginLeft:size.size15}}/>
 
         <VictoryChart
@@ -137,8 +133,8 @@ const Activity=()=>{
         </Shadow>
       </View>
 
-        <View style={{width:size.size340, height:size.size450, marginTop:(size.size135*-1), marginLeft:size.size17}}>
-          <Text style={[styles.txtLeft, {marginLeft:size.size10, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>Annual Leave</Text>
+        <View style={ActivityStyle.chartNext}>
+          <Text style={[ActivityStyle.txtLeft, {marginLeft:size.size10, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>Annual Leave</Text>
           <Shadow style={{width:size.size340, height:size.size370, backgroundColor:'white'}}>
 
           <VictoryChart
@@ -244,29 +240,4 @@ const Activity=()=>{
   );
 }
  export default Activity;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-   },
-  txt: {
-    marginTop:size.size20,
-    fontSize:size.size16,
-    fontWeight:'500',
-    lineHeight:size.size24,
-    letterSpacing:0.24,
-    color:'#1B3131'
-  },
-  txtLeft:{
-    marginRight:size.size240,
-    marginTop:size.size20,
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.24,
-    color:'#1B3131'
-  }
-})
-
 

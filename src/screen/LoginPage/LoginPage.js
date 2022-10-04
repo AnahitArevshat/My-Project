@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { useDispatch, useSelector } from "react-redux";
 import Google from '../../assets/google.svg';
 import Faceb from '../../assets/facebook.svg';
-import Phone from '../../assets/OtherPhone.svg';
 import {
   SafeAreaView,
   View,
   Image,
   Text,
-  TouchableOpacity, Keyboard, Alert,TextInput
-} from "react-native";
+  TouchableOpacity, Keyboard, Alert} from "react-native";
 
 import { NotificationServices, requestUserPermission } from "../../utils/PushNotifications";
 import {mainStyle} from './styleLoginPage';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
-import BottomSheetForNotif from "../../components/bottomSheetForNotif/bottomSheetForNotif";
 import {getPhotosAction} from '../../reduxLogic/Actions/action'
 import size from '../../functions/ratio';
 import Loader from "../../components/Loader/Loader";
@@ -191,19 +188,19 @@ const LoginPage=({navigation})=> {
       <SafeAreaView style={mainStyle.container}>
         <Loader visible={loading} />
         <Image
-          style={{ width: size.size263, height: size.size241, marginBottom: size.size20 }}
+          style={mainStyle.img}
           source={require("../../image/Group5591.png")}
         />
         <Text style={mainStyle.txt}>Log in</Text>
         <View>
-          <View style={{flexDirection: 'row', width:size.size340, marginTop:size.size30, marginLeft:size.size10}}>
+          <View style={mainStyle.viewButGroup}>
             <ButtonGroupeForNotif
               buttons={['Email Authentication', 'Phone Authentication']}
               doSomthingAfterClick={printButtonLable}
             />
           </View>
           {number===0 ?
-            <View style={{justifyContent:'center', alignItems:'center'}}>
+            <View style={mainStyle.viewForInput}>
               <Input
                 iconName='person-outline'
                 placeholder='Email'
@@ -226,13 +223,13 @@ const LoginPage=({navigation})=> {
               />
               <Button title='Login' onPress={validate} />
               <TouchableOpacity onPress={loadSecond}>
-                <Text style={{ textAlign: 'right', marginLeft:size.size225, marginTop: size.size15 }}>Forgot password?</Text>
+                <Text style={mainStyle.txtForPass}>Forgot password?</Text>
               </TouchableOpacity>
             </View>
             :
             <View style={{marginTop:size.size14}}>
 
-            <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+            <View style={mainStyle.viewCode}>
             <View>
               <InputOTP iconName='call' placeholder='Phone number' value={phoneNum} onChangeText={text => setPhoneNum(text)}/>
             </View>
@@ -240,13 +237,13 @@ const LoginPage=({navigation})=> {
             <TouchableOpacity
             style={mainStyle.OTP}
             onPress={() => signInWithPhoneNumber(phoneNum)}>
-            <Text style={{color:'white', fontWeight:'600', fontSize:size.size14, lineHeight:size.size16}}>Submit</Text>
+            <Text style={mainStyle.txtSubmit}>Submit</Text>
             </TouchableOpacity>
             </View>
             </View>
 
 
-              <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+              <View style={mainStyle.viewCode}>
                 <View>
                   <InputOTP placeholder='Enter OTP' value={code} onChangeText={text => setCode(text)}/>
                 </View>
@@ -254,7 +251,7 @@ const LoginPage=({navigation})=> {
                   <TouchableOpacity
                     style={mainStyle.OTP}
                     onPress={() => confirmCode()}>
-                    <Text style={{color:'white', fontWeight:'600', fontSize:size.size14, lineHeight:size.size16}}>Confirm Code</Text>
+                    <Text style={mainStyle.txtSubmit}>Confirm Code</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -262,7 +259,7 @@ const LoginPage=({navigation})=> {
             </View>
           }
   <View style={number===0 ? {marginTop:size.size20} : {marginBottom:size.size20}}>
-          <View style={{flexDirection:'row', marginTop:size.size30}}>
+          <View style={mainStyle.viewGoogle}>
           <TouchableOpacity onPress={signWithGoogleAsync}>
             <Google style={{marginLeft:size.size10}}/>
           </TouchableOpacity>
@@ -281,45 +278,6 @@ const LoginPage=({navigation})=> {
 export default LoginPage;
 
 
-/*
-    <View style={{position:'absolute'}}>
-          <Input
-            iconName='person-outline'
-            placeholder='Email'
-            error={errors.email}
-            onChangeText={text => dataOnChange(text, 'email')}
-            onFocus={() => {
-              dataError(null, 'email')
-            }}
-            //lable="Email"
-          />
-          </View>
-            <View style={{position:'absolute', left:size.size210}}>
-            <InputOTP placeholder='Enter OTP' value={code} onChangeText={text => setCode(text)}/>
-            </View>
-
-
-          <View style={{position:'absolute', top:90}}>
-          <Input
-            error={errors.password}
-            onChangeText={(text) => dataOnChange(text, 'password')}
-            onFocus={() => {
-              dataError(null, 'password')
-            }}
-            iconName='lock-outline'
-            //lable="Password"
-            placeholder='Password'
-          />
-          </View>
-            <View style={mainStyle.ViewOTP}>
-              <TouchableOpacity
-                style={mainStyle.OTP}
-                onPress={() => confirmCode()}>
-                <Text style={{color:'white', fontWeight:'600', fontSize:size.size14, lineHeight:size.size16}}>Confirm Code</Text>
-              </TouchableOpacity>
-            </View>
-
-*/
 
 
 

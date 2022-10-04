@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Keyboard } from "react-native";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import { View, Text, TouchableOpacity, Dimensions } from "react-native";
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import moment from 'moment';
 import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
@@ -11,6 +11,8 @@ import CalendarVacation from '../CalendarVacation/CalendarVacation';
 import Greate from '../../assets/greate.svg';
 import InputTasck from "../input/inputTasck";
 import size from '../../functions/ratio';
+import {BSFBStyle} from '../bootomSheetForBook/styleBSFB';
+
 
 const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation}) => {
 
@@ -97,13 +99,13 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSFBStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSFBStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'75%', alignItems:'center'}}>
-                <Text style={styles.txt}>Choose book leave</Text>
-                <View  style={styles.contan}>
+              <View style={BSFBStyle.viewCBL}>
+                <Text style={BSFBStyle.txt}>Choose book leave</Text>
+                <View  style={BSFBStyle.contan}>
                   <CheckButtonGroupe
                     buttons={['Hourly leave', 'Day off', 'Work remotely', 'Vacation']}
                     doSomthingAfterClick={printButtonLable}/>
@@ -130,31 +132,30 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSFBStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSFBStyle.closeBut}/>
               </TouchableOpacity>
               <View style={{width:'100%', height:height}}>
                 <View style={{marginLeft:size.size28}}>
-                <Text style={styles.txt}>Hourly leave</Text>
+                <Text style={BSFBStyle.txt}>Hourly leave</Text>
                 </View>
-                <View style={{marginLeft:size.size28, marginTop:size.size20}}>
-                <Text style={styles.txt1}>{currentDay}</Text>
+                <View style={BSFBStyle.viewCurrDay}>
+                <Text style={BSFBStyle.txtCurrDay}>{currentDay}</Text>
                 </View>
-                <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop:size.size5}}>
+                <View style={BSFBStyle.viewTP}>
                 <View style={{marginLeft:size.size5}}>
                   <TimePicker/>
                 </View>
-                <View  style={{flex:1, alignItems:'center', justifyContent:'space-between', marginTop:size.size30,
-                  marginLeft:(size.size10*-1)}}>
+                <View  style={BSFBStyle.viewButGroupe}>
                   <ButtonGroupForBook
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day',]}
                     doSomthingAfterClick={printButtonLable}/>
                 </View>
-                <View style={styles.mult}>
+                <View style={BSFBStyle.mult}>
                   <InputTasck name='Description'multiline onChangeText={(text)=>setDesc(text)}/>
                  </View>
-                <View style={{alignItems:'center', marginBottom:size.size260, marginTop:(size.size5*-1)}}>
+                <View style={BSFBStyle.butHL}>
                   <Button title='Book'onPress={(el)=>HandleClick(el, numBook.numType)}/>
                 </View>
               </View>
@@ -176,16 +177,16 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSFBStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSFBStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'80%'}}>
+              <View style={BSFBStyle.viewVac}>
                 <View style={{marginLeft:size.size35}}>
-                  <Text style={styles.txt}>Vacation</Text>
+                  <Text style={BSFBStyle.txt}>Vacation</Text>
                 </View>
                 <CalendarVacation/>
-                <View style={styles.multil}>
+                <View style={BSFBStyle.multil}>
                   <InputTasck name='Description'multiline/>
                 </View>
                   <View style={{alignItems:'center'}}>
@@ -208,13 +209,13 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSFBStyle.contentContainer}>
               <TouchableOpacity onPress={greatClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSFBStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'70%', alignItems:'center'}}>
+              <View style={BSFBStyle.viewGreate}>
                 <Greate style={{marginTop:size.size50}}/>
-                <Text style={[styles.txt, {marginTop:size.size50}]}>Greate!</Text>
+                <Text style={[BSFBStyle.txt, {marginTop:size.size50}]}>Greate!</Text>
                 <Text style={{marginTop:size.size50}}>Time successfully booked!</Text>
               </View>
             </View>
@@ -225,34 +226,6 @@ const BottomSheetForBook = ({doSomething, ind, mod, setMod, setInd, navigation})
   }
 };
 
-const styles = StyleSheet.create({
-   contentContainer: {
-    alignItems: 'center',
-  },
-  contan:{
-    alignItems: 'center',
-     },
-  txt:{
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-    color: '#11493E',
-  },
-
-  txt1:{
-    fontSize:size.size16,
-    fontWeight:'500',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-    color: '#11493E',
-  },
-
-  mult:{width:size.size325, height: size.size91, borderWidth:size.size1,borderColor: '#E3E3E3', borderRadius:size.size6},
-  multil:{width:size.size320, height: size.size91, borderWidth:size.size1,borderColor: '#E3E3E3', borderRadius:size.size6,
-    marginTop:size.size30, marginBottom:(size.size15*-1), marginLeft:size.size28}
-
-});
 
 export default BottomSheetForBook;
 

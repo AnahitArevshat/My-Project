@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {TouchableOpacity, View, ImageBackground, StyleSheet } from "react-native";
 import Home1 from "../../assets/home1.svg";
 import BottomAppBar1 from "../../assets/BottomAppBar1.svg";
@@ -42,14 +42,14 @@ function MyTabBar({ state, descriptors, navigation }) {
 
   return (
 
-    <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => setShowItem(!showItem)}>
         {showItem ?
           (
-            <Poligon style={{ position: "absolute", bottom: (size.size28*-1), left:size.size125 }} />
+            <Poligon style={styles.pol} />
 
           )
-          : <PoligonPress style={{ position: "absolute", bottom: (size.size28*-1), left:size.size125 }} />
+          : <PoligonPress style={styles.polPress} />
 
         }
 
@@ -65,9 +65,8 @@ function MyTabBar({ state, descriptors, navigation }) {
         </View>
 
       ) : null}
-      <ImageBackground style={{ width: size.size340, height:size.size70, marginBottom: size.size5 }}
-                       source={require("../../image/Rectangle843.png")}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
+      <ImageBackground style={styles.img} source={require("../../image/Rectangle843.png")}>
+        <View style={styles.viewRoute}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
            // console.log(route.name);
@@ -114,7 +113,7 @@ function MyTabBar({ state, descriptors, navigation }) {
                   testID={options.tabBarTestID}
                   onPress={onPress}
                   onLongPress={onLongPress}
-                  style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+                  style={styles.indStyle}
                 >
 
                   {obj[route.name]}
@@ -131,6 +130,11 @@ function MyTabBar({ state, descriptors, navigation }) {
 export default MyTabBar;
 
 const styles=StyleSheet.create({
+  container:{
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   button:{
     position:'absolute',
     top:(size.size80*-1),
@@ -157,6 +161,30 @@ const styles=StyleSheet.create({
     left:size.size201,
     justifyContent:'center',
     alignItems:'center',
+  },
+  pol:{
+    position: "absolute",
+    bottom: (size.size28*-1),
+    left:size.size125
+  },
+  polPress:{
+    position: "absolute",
+    bottom: (size.size28*-1),
+    left:size.size125
+  },
+  img:{
+    width: size.size340,
+    height:size.size70,
+    marginBottom: size.size5
+  },
+  viewRoute:{
+    flex: 1,
+    flexDirection: "row"
+  },
+  indStyle:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   }
 
 })

@@ -1,6 +1,5 @@
 import React, {useState, useMemo} from 'react';
-import {
-  StyleSheet, Text, View,ScrollView, TextInput, TouchableOpacity} from 'react-native'
+import {Text, View,ScrollView, TextInput, TouchableOpacity} from 'react-native'
 import { VictoryPie, VictoryLabel, VictoryLegend} from "victory-native";
 import {useSelector} from "react-redux";
 import { Calendar } from "react-native-calendars";
@@ -11,7 +10,7 @@ import size from "../../functions/ratio";
 import CalendarImage from '../../assets/calendarImage.svg';
 import ProfileEvents from "../../components/ProfileEvents/ProfileEvents";
 import HideTabBar from '../../functions/hideTabBar';
-
+import {HistoryEventStyle} from '../HistoryEvents/styleHistoryEvents';
 
 const HistoryEvents=({navigation})=>{
   const event=useSelector(state=>state.events.events);
@@ -66,12 +65,12 @@ const HistoryEvents=({navigation})=>{
   return(
     <>
         <View>
-          <Text style={[styles.txtLeft, {marginLeft:size.size130, marginRight: size.size100, marginBottom:size.size25}]}>
+          <Text style={HistoryEventStyle.txtHisEvent}>
             History events
           </Text>
         </View>
 
-         <View style={{height:size.size350, width:size.size350, marginLeft:size.size20}}>
+         <View style={HistoryEventStyle.viewVicPie}>
           <Svg viewBox="0 0 600 600" >
             <VictoryPie
               padding={size.size122}
@@ -156,7 +155,7 @@ const HistoryEvents=({navigation})=>{
             />
           </Svg>
         </View>
-        <View style={styles.inputContaner}>
+        <View style={HistoryEventStyle.inputContaner}>
         <TextInput placeholder='Search history'
             onChangeText={(text)=>setSearchField(text)}
         />
@@ -166,7 +165,7 @@ const HistoryEvents=({navigation})=>{
         </View>
         {showItem &&
           <View style={{alignItems:'center'}}>
-          <Shadow style={{width:size.size300, borderRadius:size.size4}}>
+          <Shadow style={HistoryEventStyle.shadCalendar}>
             <Calendar onDayPress={(day) => onSelDay(day)}/>
           </Shadow>
           </View>
@@ -181,31 +180,4 @@ const HistoryEvents=({navigation})=>{
 }
 
 export default HistoryEvents;
-
-const styles = StyleSheet.create({
-
-  txtLeft:{
-    marginRight:size.size250,
-    marginTop:size.size20,
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.24,
-    color:'#1B3131'
-  },
-
-  inputContaner:{
-    width:size.size315,
-    height:size.size45,
-    flexDirection:'row',
-    paddingHorizontal:size.size5,
-    alignItems:'center',
-    justifyContent:'space-between',
-    borderWidth:size.size1,
-    borderColor:'#D1CDCD',
-    marginTop:(size.size100*-1),
-    marginLeft:size.size30,
-  }
-})
-
 

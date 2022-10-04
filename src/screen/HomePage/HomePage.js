@@ -1,15 +1,13 @@
 import React, { useMemo, useState } from "react";
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 import {Text, View, SafeAreaView, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import moment from 'moment';
-import {Calendar} from 'react-native-calendars';
 import {homeStyle} from './styleHomePage';
 import CalendarImage from '../../assets/calendarImage.svg';
 import CalendarImageOff from '../../assets/calendarOff.svg';
 import ButtonGroup from '../../components/butonGroup/butonGroup';
 import TaskComp from '../../components/taskComp/taskComp';
 import EventComp from '../../components/eventComp/eventComp';
-import size from '../../functions/ratio';
 import HomePageCalendar from "../HomePageCalendar/HomePageCalendar";
 import AllComponent from "../../components/allComponent/allComponent";
 
@@ -42,7 +40,7 @@ const HomePage = ({navigation, route}) => {
     //setSelectDay('');
   }
 
-  const searched = useMemo(() => {
+  const searchedAll = useMemo(() => {
     if (selectDay) {
            return [...allsort].filter(
         (p) =>
@@ -50,21 +48,42 @@ const HomePage = ({navigation, route}) => {
       );
     }
     return allsort;
-
   }, [selectDay, allsort]);
 
+  const searchedTask = useMemo(() => {
+    if (selectDay) {
+      return [...task.tasks].filter(
+        (p) =>
+          moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
+      );
+    }
+    return task.tasks;
+  }, [selectDay, task.tasks]);
 
+  const searchedEvent = useMemo(() => {
+    if (selectDay) {
+      return [...event.events].filter(
+        (p) =>
+          moment(p.dat).format('MMM DD, YYYY').includes(moment(selectDay).format('MMM DD, YYYY'))
+      );
+    }
+    return event.events;
+  }, [selectDay, event.events]);
+
+
+  const reset=()=>{
+    setSelectDay('');
+   }
 
 
   return (
     <SafeAreaView style={homeStyle.container}>
-      <View style={{height:size.size28, marginBottom:size.size20, marginRight:size.size180, marginTop:size.size20}}>
-      <Text style={{textAlign:'left', fontSize:size.size24, fontWeight:'600'}}>Hello, Name</Text>
+      <View style={homeStyle.viewHelloName}>
+      <Text style={homeStyle.txtHelloName}>Hello, Name</Text>
       </View>
       <Image
-        style={{width: size.size315, height: size.size145, marginBottom: size.size15}}
+        style={homeStyle.img}
         source={require('../../image/Frame736.png')}
-
       />
       <View style={homeStyle.navigItem}>
         <ButtonGroup
@@ -72,9 +91,9 @@ const HomePage = ({navigation, route}) => {
           doSomthingAfterClick={printButtonLable}
         />
       </View>
-      <View style={{flexDirection: 'row', width: size.size310, marginTop:size.size15, marginLeft:size.size5}}>
+      <View style={homeStyle.viewFormatDat}>
         <View style={{flex: 1}}>
-          <Text style={{fontSize:size.size14, fontWeight: '600'}}>
+          <Text style={homeStyle.txtFormatDat}>
             {FormatedDat}
           </Text>
         </View>
@@ -82,24 +101,33 @@ const HomePage = ({navigation, route}) => {
           {showCalendar ? <CalendarImageOff/> : <CalendarImage/>}
         </TouchableOpacity>
       </View>
-        {showCalendar && <HomePageCalendar
+        {
+        showCalendar &&
+          <>
+        <HomePageCalendar
         selectDay={selectDay}
         setSelectDay={setSelectDay}
         markedDates={markedDates}
-        setMarkedDates={setMarkedDates}/>}
+        setMarkedDates={setMarkedDates}/>
+            <TouchableOpacity onPress={reset} style={homeStyle.TochRes}>
+              <Text style={homeStyle.txtRes}>Reset</Text>
+            </TouchableOpacity>
+
+          </>
+        }
       {num===0 &&
         <ScrollView>
-        <TaskComp  el={task.tasks} navigation={navigation}/>
+        <TaskComp  el={searchedTask} navigation={navigation}/>
         </ScrollView>
       }
       {num===1 &&
-        <FlatList data={event.events} keyExtractor={(item, index)=>index} renderItem={({item})=>(
+        <FlatList data={searchedEvent} keyExtractor={(item, index)=>index} renderItem={({item})=>(
         <EventComp item={item}/>
         )}
         />
         }
       {num===2 &&
-        <FlatList data={searched} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
+        <FlatList data={searchedAll} keyExtractor={(item, index)=>index} renderItem={({item, index})=>(
           <AllComponent item={item}/>
         )}
         />
@@ -112,21 +140,3 @@ export default HomePage;
 
 
 
-/*const createMarkedDat=()=>{
-
-    let arrayOfDates = task.tasks.dat;
-
-    arrayOfDates.map((day) => {
-      customMarkedDates[day] = {
-        customStyles: {
-          container: {
-            backgroundColor: "red",
-          },
-          text: {
-            color: "white",
-            fontWeight: "bold",
-          },
-        },
-      };
-    });
-  }*/

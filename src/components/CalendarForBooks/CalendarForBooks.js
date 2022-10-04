@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
-import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {Calendar} from 'react-native-calendars';
 import { Shadow } from 'react-native-shadow-2';
@@ -57,9 +56,9 @@ const CalendarForBooks=()=>{
   return(<View>
       <TouchableOpacity onPress={()=>setShowItem(!showItem)}>
       </TouchableOpacity>
-      <Text style={{color: '#11493E', fontSize:size.size16, fontWeight:'500', letterSpacing:0.25, marginBottom:size.size20, marginLeft:size.size35}}>{arr.length>1 && datFor}</Text>
+      <Text style={styles.txt}>{arr.length>1 && datFor}</Text>
       <View style={{alignItems:'center'}}>
-      <Shadow style={{width:size.size320, borderRadius:size.size4,}}>
+      <Shadow style={styles.shad}>
       <Calendar  markingType={'period'}
                  onDayPress={(day) => updateStore(day)}
                  markedDates= {obj}
@@ -73,5 +72,19 @@ const CalendarForBooks=()=>{
 
 export default CalendarForBooks;
 
+const styles = StyleSheet.create({
+   txt:{
+     color: '#11493E',
+     fontSize:size.size16,
+     fontWeight:'500',
+     letterSpacing:size.size1/4,
+     marginBottom:size.size20,
+     marginLeft:size.size35
+  },
+  shad:{
+    width:size.size320,
+    borderRadius:size.size4
+  }
+})
 
 

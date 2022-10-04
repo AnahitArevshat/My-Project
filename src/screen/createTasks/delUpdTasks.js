@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {
-  Text, View, TextInput, SafeAreaView, StyleSheet, TouchableOpacity} from "react-native";
+  Text, View, TextInput, SafeAreaView, TouchableOpacity} from "react-native";
+import moment from "moment";
 import CalendarImage from "../../assets/calendarImage.svg";
 import Chack from '../../assets/chacked.svg';
 import ButtonUpd from '../../components/buttonUpdDel/buttonUpd';
@@ -12,7 +13,7 @@ import {proj} from '../../items/proj';
 import HideTabBar from '../../functions/hideTabBar';
 import { removeTasksAction, editTasksAction, clickIdAction } from "../../tasksReducer/taskReducer";
 import size from '../../functions/ratio';
-import moment from "moment";
+import {DelUpdTasksStyle} from '../createTasks/styleDelUpdTasks';
 
 
 const DelUpdTasks=({navigation, route})=>{
@@ -35,8 +36,6 @@ const DelUpdTasks=({navigation, route})=>{
       id:elemId.id,
       title:titl ? titl :elemId.title,
       projects:proj[numb1] ? proj[numb1].name :elemId.projects,
-      //dat:numb2 && numb2 ? numb2 : elemId.dat,
-      //dat:numb2 && numb2 ? moment(numb2).format("YYYY-MM-DD") : moment(elemId.dat).format("YYYY-MM-DD"),
       dat:numb2 && numb2 ? moment(new Date(numb2)).format("YYYY-MM-DD") : moment(new Date(elemId.dat)).format("YYYY-MM-DD"),
       duration:durat[numb] ? durat[numb].name : elemId.duration,
     }))
@@ -81,52 +80,52 @@ const DelUpdTasks=({navigation, route})=>{
 
   return(
 
-        <SafeAreaView style={styles.conteiner}>
+        <SafeAreaView style={DelUpdTasksStyle.conteiner}>
           {mod && <ModalWindow ind={ind} doSomething={doSomething}/>}
 
-          <View style={{width:size.size100, height:size.size27}}>
-            <Text style={{fontSize:size.size16, fontWeight:'500', lineHeight:size.size24, letterSpacing:0.25, color: '#1B3131'}}>Update Task</Text>
+          <View style={DelUpdTasksStyle.viewUT}>
+            <Text style={DelUpdTasksStyle.txtUT}>Update Task</Text>
           </View>
-          <View style={styles.emailContainer}>
-            <View style={styles.commonInput}>
+          <View style={DelUpdTasksStyle.emailContainer}>
+            <View style={DelUpdTasksStyle.commonInput}>
               <TextInput  placeholder={elemId.title} name='Title*'  value={titl} onChangeText={(text)=>{setTitl(text)}}/>
             </View>
           </View>
-          <TouchableOpacity onPress={clickProg} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size8}}>Projects*</Text>
-              <View style={{alignItems:'center', marginLeft:size.size50}}>
+          <TouchableOpacity onPress={clickProg} style={DelUpdTasksStyle.emailContainer}>
+            <View style={DelUpdTasksStyle.viewProj}>
+              <Text style={DelUpdTasksStyle.txtProj}>Projects*</Text>
+              <View style={DelUpdTasksStyle.viewProjSec}>
                 <Text style={{fontWeight:'bold'}}>{numb1!=='' ? proj[numb1].name : elemId.projects}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={DelUpdTasksStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickDat} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center'}}>
-              <Text style={{fontSize:size.size13, color:'light', marginLeft:size.size9}}>Date</Text>
-              <View style={{alignItems:'center', marginLeft:size.size80}}>
+          <TouchableOpacity onPress={clickDat} style={DelUpdTasksStyle.emailContainer}>
+            <View style={DelUpdTasksStyle.viewDat}>
+              <Text style={DelUpdTasksStyle.txtDat}>Date</Text>
+              <View style={DelUpdTasksStyle.viewDatSec}>
                 <Text style={{fontWeight:'bold'}}>{numb2!=='' ? numb2 : elemId.dat}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={DelUpdTasksStyle.chackIcon}>
               <CalendarImage/>
             </TouchableOpacity>
           </TouchableOpacity>
-          <TouchableOpacity onPress={clickDur} style={styles.emailContainer}>
-            <View style={{width: '90%', flexDirection:'row', alignItems:'center' }}>
-              <Text style={{fontSize:size.size13, color:'light',marginLeft:size.size8}}>Duration</Text>
-              <View style={{alignItems:'center', marginLeft:size.size60}}>
+          <TouchableOpacity onPress={clickDur} style={DelUpdTasksStyle.emailContainer}>
+            <View style={DelUpdTasksStyle.viewDat}>
+              <Text style={DelUpdTasksStyle.txtDur}>Duration</Text>
+              <View style={DelUpdTasksStyle.viewDur}>
                 <Text style={{fontWeight:'bold'}}>{numb !=='' ? durat[numb].name : elemId.duration}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.chackIcon}>
+            <TouchableOpacity style={DelUpdTasksStyle.chackIcon}>
               <Chack/>
             </TouchableOpacity>
           </TouchableOpacity>
 
-          <View style={{flexDirection:'row', marginTop:size.size50}}>
+          <View style={DelUpdTasksStyle.viewDel}>
             <View style={{marginRight:size.size7}}>
               <ButtonDel title='Delete' onPress={removeTasks}/>
            </View>
@@ -139,40 +138,6 @@ const DelUpdTasks=({navigation, route})=>{
   );
 }
 
-const styles=StyleSheet.create({
-  conteiner:{
-    backgroundColor: '#FFFFFF;',
-    flex: 1,
-    alignItems: 'center',
-    marginTop:size.size60
-  },
-  viewcont:{
-    flexDirection: 'row',
-    width: size.size313,
-    marginTop: size.size35,
-    borderBottomWidth:0.5,
-    borderBottomColor:'#E3E3E3',
-  },
-  txt:{
-    textAlign:'center',
-  },
-  emailContainer: {
-    flexDirection: "row",
-    height: size.size40,
-    marginTop: size.size25,
-    marginRight:size.size10,
-    marginLeft:size.size10,
-    borderBottomWidth:0.5,
-    borderBottomColor:'#E3E3E3',
-  },
-  chackIcon: {
-    alignContent: 'center',
-    justifyContent:'center'
-  },
-  commonInput: {
-    width: '90%'
-  }
-})
 
 export default DelUpdTasks;
 

@@ -1,22 +1,14 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  KeyboardAvoidingView
-} from "react-native";
+import {View,Text,TouchableOpacity} from "react-native";
 import BottomSheet, {BottomSheetView, BottomSheetTextInput} from '@gorhom/bottom-sheet';
 import ButtonForNotif from "../buttonForNotif/buttonForNotif";
 import ButtonForNotifDel from "../buttonForNotif/buttonForNotifDel";
 import Clos from '../../assets/clos.svg';
 import { editNotificAction } from "../../notificReducer/notificReducer";
-import size from '../../functions/ratio';
+import {BSFNStyle} from '../bottomSheetForNotif/styleBSFN';
 
-
-const BottomSheetForNotif = ({doSomething, ind, mod, setMod, setInd, number}) => {
+const BottomSheetForNotif = ({ind, mod, setMod, setInd, number}) => {
 
   // ref
   const bottomSheetRef = useRef(null);
@@ -49,34 +41,34 @@ var children;
 
   if(ind===1){
  children=<BottomSheetView >
-           <View style={{width:'100%', height:'60%'}}>
+           <View style={BSFNStyle.viewChild}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:'90%', marginTop:(size.size1*-1)}}/>
+                <Clos style={BSFNStyle.butClose}/>
               </TouchableOpacity>
               <View style={{alignItems:'center'}}>
-              <Text style={styles.txt}>Work Remotely Request</Text>
+              <Text style={BSFNStyle.txt}>Work Remotely Request</Text>
               </View>
-              <View style={{flexDirection:'row', marginTop:size.size15}}>
-                <View style={{marginLeft:size.size15}}>
-                <Text style={styles.txt1}>Employee:</Text>
+              <View style={BSFNStyle.viewEmpl}>
+                <View style={BSFNStyle.viewFirst}>
+                <Text style={BSFNStyle.txt1}>Employee:</Text>
                 </View>
-                <View style={{marginLeft:size.size15}}>
-                <Text style={styles.txt2}>Name Surname</Text>
-                </View>
-              </View>
-              <View style={{flexDirection:'row', marginTop:size.size15}}>
-              <View  style={{marginLeft:size.size15}}>
-                  <Text style={styles.txt1}>Date</Text>
-                </View>
-                <View  style={{marginLeft:size.size50}}>
-                  <Text style={styles.txt2}>{dev.dat}</Text>
+                <View style={BSFNStyle.viewFirst}>
+                <Text style={BSFNStyle.txtName}>Name Surname</Text>
                 </View>
               </View>
-              <View style={{marginLeft:size.size15, marginTop:size.size15}}>
-                <Text style={styles.txt1}>Comment:</Text>
+              <View style={BSFNStyle.viewEmpl}>
+              <View  style={BSFNStyle.viewFirst}>
+                  <Text style={BSFNStyle.txt1}>Date</Text>
+                </View>
+                <View  style={BSFNStyle.viewSec}>
+                  <Text style={BSFNStyle.txtName}>{dev.dat}</Text>
+                </View>
               </View>
-              <View style={{marginLeft:size.size15, marginTop:size.size15, marginRight:size.size15}}>
-                <Text style={[styles.txt1, { textAlign:'justify' }]}>
+              <View style={BSFNStyle.viewComment}>
+                <Text style={BSFNStyle.txt1}>Comment:</Text>
+              </View>
+              <View style={BSFNStyle.viewDesc}>
+                <Text style={[BSFNStyle.txt1, { textAlign:'justify' }]}>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
                   standard dummy text ever since the
@@ -87,34 +79,34 @@ var children;
   }
   else {
     children=<BottomSheetView >
-      <View style={{width:'100%', height:'60%'}}>
+      <View style={BSFNStyle.viewChild}>
         <TouchableOpacity onPress={handleClosePress}>
-          <Clos style={{marginLeft:'90%', marginTop:(size.size1*-1)}}/>
+          <Clos style={BSFNStyle.butClose}/>
         </TouchableOpacity>
         <View style={{alignItems:'center'}}>
-          <Text style={styles.txt}>Work Remotely Request</Text>
+          <Text style={BSFNStyle.txt}>Work Remotely Request</Text>
         </View>
-        <View style={{flexDirection:'row', marginTop:size.size15}}>
-          <View style={{marginLeft:size.size15}}>
-            <Text style={styles.txt1}>Employee:</Text>
+        <View style={BSFNStyle.viewEmpl}>
+          <View style={BSFNStyle.viewFirst}>
+            <Text style={BSFNStyle.txt1}>Employee:</Text>
           </View>
-          <View style={{marginLeft:size.size15}}>
-            <Text style={styles.txt2}>Name Surname</Text>
-          </View>
-        </View>
-        <View style={{flexDirection:'row', marginTop:size.size15}}>
-          <View  style={{marginLeft:size.size15}}>
-            <Text style={styles.txt1}>Date</Text>
-          </View>
-          <View  style={{marginLeft:size.size50}}>
-            <Text style={styles.txt2}>{dev.dat}</Text>
+          <View style={BSFNStyle.viewFirst}>
+            <Text style={BSFNStyle.txtName}>Name Surname</Text>
           </View>
         </View>
-        <View style={{marginLeft:size.size15, marginTop:size.size15}}>
-          <Text style={styles.txt1}>Description:</Text>
+        <View style={BSFNStyle.viewEmpl}>
+          <View  style={BSFNStyle.viewFirst}>
+            <Text style={BSFNStyle.txt1}>Date</Text>
+          </View>
+          <View  style={BSFNStyle.viewSec}>
+            <Text style={BSFNStyle.txtName}>{dev.dat}</Text>
+          </View>
         </View>
-        <View style={{marginLeft:size.size15, marginTop:size.size13, marginRight:size.size15}}>
-          <Text style={[styles.txt1, { textAlign:'justify' }]}>
+        <View style={BSFNStyle.viewComment}>
+          <Text style={BSFNStyle.txt1}>Description:</Text>
+        </View>
+        <View style={BSFNStyle.viewDescSec}>
+          <Text style={[BSFNStyle.txt1, { textAlign:'justify' }]}>
             Lorem Ipsum is simply dummy text of the printing and
             typesetting industry. Lorem Ipsum has been the industry's
             standard dummy text ever since the
@@ -123,18 +115,16 @@ var children;
       </View>
        <BottomSheetTextInput
           placeholder='Add comment'
-          style={styles.posabs}
-          //onBlur={()=>setMarTop(false)}
-          //onFocus={()=>setMarTop(true)}
-        />
-      <View style={{flexDirection:'row', marginLeft:size.size80, position:'absolute', top:size.size240, left:size.size50}}>
+          style={BSFNStyle.posabs}
+       />
+      <View style={BSFNStyle.viewButton}>
       <ButtonForNotif title='Accept'/>
       <ButtonForNotifDel title='Cancel'/>
       </View>
     </BottomSheetView>
   }
       return (
-          <BottomSheet style={styles.contentContainer}
+          <BottomSheet style={BSFNStyle.contentContainer}
             ref={bottomSheetRef}
             index={1}
             snapPoints={snapPoints}
@@ -148,51 +138,6 @@ var children;
       );
     };
 
-const styles = StyleSheet.create({
-    contentContainer: {
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor: 'grey',
-    //marginRight:'10%',
-   // marginLeft:'10%'
-  },
-
-  txt:{
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-    color: '#11493E',
-  },
-
-  txt1:{
-    fontSize:size.size14,
-    fontWeight:'400',
-    lineHeight:size.size16,
-    letterSpacing:0.25,
-    color: '#616062'
-  },
-  txt2:{
-    fontSize:size.size14,
-    fontWeight:'600',
-    lineHeight:size.size16,
-    letterSpacing:0.25,
-    color: '#347474'
-},
-
-    posabs: {
-      width:size.size325,
-      height: size.size40,
-      border:size.size1,
-      borderWidth:size.size2,
-      borderRadius:size.size10,
-      borderColor:'#F5F5F5',
-      position:'absolute',
-      top:size.size215,
-      left:size.size15,
-      }
-
-});
 
 export default BottomSheetForNotif;
 

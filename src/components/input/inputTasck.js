@@ -9,7 +9,7 @@ const InputTasck=({name, navigation, onChange=()=>{}, onFocus=()=>{},...props})=
       <View style={styles.commonInput}>
 
         <TextInput
-          style={{ paddingLeft:size.size15}}
+          style={styles.inp}
           onFocus={()=>{onFocus();setIsFocused(true)}}
           placeholder={name} />
 
@@ -17,9 +17,11 @@ const InputTasck=({name, navigation, onChange=()=>{}, onFocus=()=>{},...props})=
   );
 }
   const styles=StyleSheet.create({
-
       commonInput: {
       width: '90%',
+    },
+    inp:{
+      paddingLeft:size.size15
     }
       })
 

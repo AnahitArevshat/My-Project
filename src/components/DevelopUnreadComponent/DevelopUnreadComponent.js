@@ -21,15 +21,15 @@ const DevelopUnreadComponent=({el, mod, setMod, ind, setInd})=> {
   }
 
   return(
-    <View style={{marginLeft:(size.size11*-1)}}>
+    <View style={styles.viewContainer}>
       {el.map((item, index)=>(
         <TouchableOpacity key={index} onPress={()=>receveElem(el[index])}>
-          <View style={{flexDirection:'row', width:size.size322, alignItems:'center', justifyContent:'space-between'}}>
+          <View style={styles.contain}>
             <View>
-          <Image style={{width:size.size32, height:size.size32, borderRadius:size.size11, margin:size.size7}} source={item.src}/>
+          <Image style={styles.img} source={item.src}/>
             </View>
             <View style={{flexDirection:'column'}}>
-            <View style={{flexDirection:'row', width:size.size230}}>
+            <View style={styles.viewName}>
 
              <Text style={styles.txt}>Name Surname </Text>
               {el[index].employ!=='dev'
@@ -60,6 +60,12 @@ export default DevelopUnreadComponent;
 
 
 const styles = StyleSheet.create({
+  contain:{
+    flexDirection:'row',
+    width:size.size322,
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
     txt: {
     fontSize:12,
     fontWeight:'600',
@@ -73,5 +79,18 @@ const styles = StyleSheet.create({
     letterSpacing:0.25,
     color:'#949494'
   },
+  img:{
+    width:size.size32,
+    height:size.size32,
+    borderRadius:size.size11,
+    margin:size.size7
+  },
+  viewName:{
+    flexDirection:'row',
+    width:size.size230
+  },
+  viewContainer:{
+    marginLeft:(size.size11*-1)
+  }
 })
 

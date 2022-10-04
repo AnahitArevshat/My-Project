@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, StyleSheet} from "react-native";
-//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import size from '../../functions/ratio';
 
@@ -12,7 +11,7 @@ const InputOTP=({lable, iconName, error, password, onFocus=()=>{}, ...props})=> 
     <View>
       <Text style={style.lable}>{lable}</Text>
       <View style={[style.inputContaner, {borderColor: error ? 'red' : isFocused ? '#DEDEDE': 'light'}]}>
-        <Icon name={iconName} style={{fontSize:size.size22, marginRight:size.size10, color:"#11493E"}}/>
+        <Icon name={iconName} style={style.iconName}/>
         <TextInput
           style={{flex:1}} {...props}
           secureTextEntry={hidePassword}
@@ -21,12 +20,12 @@ const InputOTP=({lable, iconName, error, password, onFocus=()=>{}, ...props})=> 
           onBlur={()=>{setIsFocused(false)}}/>
         {iconName==='lock-outline' &&
           <Icon
-            style={{color:'#83B7AD', fontSize:22}}
+            style={style.iconPass}
             onPress={()=>setHidePassword(!hidePassword)}
             name={hidePassword ? 'visibility' : 'visibility-off'}/>}
 
       </View>
-      {error && <Text style={{color:'red', fontSize:size.size12, marginTop:size.size7}}> {error}</Text>}
+      {error && <Text style={style.err}> {error}</Text>}
     </View>
   );
 }
@@ -39,6 +38,20 @@ const style=StyleSheet.create({
     borderWidth:size.size1/2,
     paddingHorizontal:size.size15,
     alignItems:'center',
+  },
+  iconName:{
+    fontSize:size.size22,
+    marginRight:size.size10,
+    color:"#11493E"
+  },
+  iconPass:{
+    color:'#83B7AD',
+    fontSize:size.size22
+  },
+  err:{
+    color:'red',
+    fontSize:size.size12,
+    marginTop:size.size7
   }
 })
 export default InputOTP;

@@ -12,7 +12,7 @@ const Input=({lable, iconName, error, password, onFocus=()=>{}, ...props})=> {
     <View>
       <Text style={style.lable}>{lable}</Text>
       <View style={[style.inputContaner, {borderColor: error ? 'red' : isFocused ? '#DEDEDE': 'light'}]}>
-        <Icon name={iconName} style={{fontSize:size.size22, marginRight:size.size10, color:"#11493E"}}/>
+        <Icon name={iconName} style={style.iconName}/>
         <TextInput
         style={{flex:1}} {...props}
         secureTextEntry={hidePassword}
@@ -21,24 +21,41 @@ const Input=({lable, iconName, error, password, onFocus=()=>{}, ...props})=> {
         onBlur={()=>{setIsFocused(false)}}/>
         {iconName==='lock-outline' &&
          <Icon
-           style={{color:'#83B7AD', fontSize:22}}
+           style={style.iconPass}
            onPress={()=>setHidePassword(!hidePassword)}
            name={hidePassword ? 'visibility' : 'visibility-off'}/>}
 
       </View>
-      {error && <Text style={{color:'red', fontSize:size.size12, marginTop:size.size7}}> {error}</Text>}
+      {error && <Text style={style.err}> {error}</Text>}
       </View>
   );
 }
 const style=StyleSheet.create({
-  lable:{marginVertical:size.size5, fontSize:size.size14,color:'#DEDEDE'},
-  inputContaner:{
+  lable:{marginVertical:size.size5,
+    fontSize:size.size14,
+    color:'#DEDEDE'
+  },
+   inputContaner:{
     width:size.size329,
     height:size.size45,
     flexDirection:'row',
     borderWidth:size.size1/2,
     paddingHorizontal:size.size15,
     alignItems:'center',
-    }
+    },
+   iconName:{
+      fontSize:size.size22,
+      marginRight:size.size10,
+      color:"#11493E"
+    },
+  iconPass:{
+    color:'#83B7AD',
+    fontSize:size.size22
+  },
+  err:{
+    color:'red',
+    fontSize:size.size12,
+    marginTop:size.size7
+  }
 })
   export default Input;

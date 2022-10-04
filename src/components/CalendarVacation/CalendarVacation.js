@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet, Text, TouchableOpacity, View,
 } from "react-native";
@@ -21,12 +21,11 @@ const CalendarVacation = props => {
     <View>
       <TouchableOpacity onPress={()=>setShowItem(!showItem)}>
       </TouchableOpacity>
-      <Text style={{color: '#11493E', fontSize:size.size16, fontWeight:'500', letterSpacing:0.25, marginBottom:size.size20,
-        marginLeft:size.size35}}>
+      <Text style={styles.txt}>
         {(startDay && endDay) && moment(startDay).format('MMMM DD - ')+moment(endDay).format('DD, YYYY')}
       </Text>
       <View style={{alignItems:'center'}}>
-        <Shadow style={{width:size.size320, borderRadius:size.size4,}}>
+        <Shadow style={styles.shad}>
           <Calendar
             onDayPress={(day) => {
               if (startDay && !endDay) {
@@ -78,3 +77,17 @@ export default connect(mapStateToProps, {
 
 
 
+const styles = StyleSheet.create({
+  txt:{
+    color: '#11493E',
+    fontSize:size.size16,
+    fontWeight:'500',
+    letterSpacing:size.size1/4,
+    marginBottom:size.size20,
+    marginLeft:size.size35
+  },
+  shad:{
+    width:size.size320,
+    borderRadius:size.size4
+  }
+})

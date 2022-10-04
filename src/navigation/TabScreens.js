@@ -14,7 +14,6 @@ import HistoryEvents from "../screen/HistoryEvents/HistoryEvents";
 import EventPage from "../screen/EventPage/EventPage";
 import ProjectPage from "../screen/ProjectPage/ProjectPage";
 import Projects from "../screen/Projects/Projects";
-import LogOff from "../screen/LogOff/LogOff";
 
 const Tab = createBottomTabNavigator();
 
@@ -82,10 +81,7 @@ function TabScreens() {
           name="ProjPag"
           component={ProjectPage}
         />
-        <Tab.Screen
-          name="LogOf"
-          component={LogOff}
-        />
+
     </Tab.Navigator>
 
   );

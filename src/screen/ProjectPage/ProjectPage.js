@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet, Text, View, ScrollView, Image,
-} from "react-native";
+import {Text, View, ScrollView, Image} from "react-native";
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryStack} from "victory-native";
 import size from "../../functions/ratio";
 import Grafik from "../../assets/grafik.svg";
-
+import {ProjectPageStyle} from '../ProjectPage/styleProjectPage';
 
 const ProjectPage=({route})=>{
 
@@ -13,7 +11,7 @@ const ProjectPage=({route})=>{
     <>
 
         <View style={{alignItems:'center'}}>
-          <Text style={styles.txtLeft}>Project name</Text>
+          <Text style={ProjectPageStyle.txtLeft}>Project name</Text>
           <Grafik style={{marginLeft:size.size40*-1}}/>
           <VictoryChart
             width={size.size340}
@@ -68,9 +66,9 @@ const ProjectPage=({route})=>{
         </View>
       <ScrollView>
       <View>
-        <Text style={styles.txtDesc}>Description</Text>
-        <View style={styles.viewDesc}>
-          <Text style={[styles.txt, {color: '#949494'}]}>
+        <Text style={ProjectPageStyle.txtDesc}>Description</Text>
+        <View style={ProjectPageStyle.viewDesc}>
+          <Text style={[ProjectPageStyle.txt, {color: '#949494'}]}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt ut
             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -80,29 +78,29 @@ const ProjectPage=({route})=>{
           </Text>
         </View>
           <View>
-          <Text style={styles.txtDesc}>Start at</Text>
-          <Text style={[styles.txt, {marginLeft:size.size35, marginTop:size.size10}]}>{route.params.startdat}</Text>
-          <Text style={styles.txtDesc}>Deadline</Text>
-          <Text style={[styles.txt, {marginLeft:size.size35, marginTop:size.size10}]}>{route.params.deadline}</Text>
+          <Text style={ProjectPageStyle.txtDesc}>Start at</Text>
+          <Text style={ProjectPageStyle.txtDat}>{route.params.startdat}</Text>
+          <Text style={ProjectPageStyle.txtDesc}>Deadline</Text>
+          <Text style={ProjectPageStyle.txtDat}>{route.params.deadline}</Text>
           </View>
           <View>
-            <Text style={styles.txtDesc}>Members</Text>
-            <View style={{flexDirection:'row', alignItems:'center'}}>
-              <View style={{marginLeft:size.size35,marginTop:size.size10}}>
-                <Image style={{width:size.size50, height:size.size50, borderRadius:size.size4}} source={require('../../assets/evenPage/partic1.jpg')}/>
+            <Text style={ProjectPageStyle.txtDesc}>Members</Text>
+            <View style={ProjectPageStyle.viewContan}>
+              <View style={ProjectPageStyle.viewImg}>
+                <Image style={ProjectPageStyle.img} source={require('../../assets/evenPage/partic1.jpg')}/>
               </View>
-              <View style={{marginTop:size.size10, marginLeft:size.size5}}>
-                <Text style={[styles.txtDesc, {marginLeft:size.size7, marginTop:size.size2}]}>Name Surname</Text>
-                <Text style={[styles.txtDesc, {marginLeft:size.size7, marginTop:size.size10 }]}>Specialist</Text>
+              <View style={ProjectPageStyle.viewName}>
+                <Text style={ProjectPageStyle.txtName}>Name Surname</Text>
+                <Text style={ProjectPageStyle.txtSpac}>Specialist</Text>
               </View>
             </View>
-            <View style={{flexDirection:'row', alignItems:'center'}}>
-              <View style={{marginLeft:size.size35,marginTop:size.size10}}>
-                <Image style={{width:size.size50, height:size.size50, borderRadius:size.size4}} source={require('../../assets/evenPage/partic3.jpg')}/>
+            <View style={ProjectPageStyle.viewContan}>
+              <View style={ProjectPageStyle.viewImg}>
+                <Image style={ProjectPageStyle.img} source={require('../../assets/evenPage/partic3.jpg')}/>
               </View>
-              <View style={{marginTop:size.size10, marginLeft:size.size5}}>
-                <Text style={[styles.txtDesc, {marginLeft:size.size7, marginTop:size.size2}]}>Name Surname</Text>
-                <Text style={[styles.txtDesc, {marginLeft:size.size7, marginTop:size.size10 }]}>Specialist</Text>
+              <View style={ProjectPageStyle.viewName}>
+                <Text style={ProjectPageStyle.txtName}>Name Surname</Text>
+                <Text style={ProjectPageStyle.txtSpac}>Specialist</Text>
               </View>
             </View>
           </View>
@@ -114,43 +112,5 @@ const ProjectPage=({route})=>{
 }
 
 export default ProjectPage;
-
-
-const styles = StyleSheet.create({
-
-  txtLeft: {
-    marginTop: size.size40,
-    marginBottom: size.size20,
-    fontSize: size.size16,
-    fontWeight: '500',
-    lineHeight: size.size24,
-    letterSpacing: 0.24,
-    color: '#1B3131'
-  },
-  txtDesc:{
-    fontSize:size.size14,
-    fontWeight:'600',
-    lineHeight:size.size16,
-    letterSpacing:0.24,
-    color: '#616062',
-    marginLeft:size.size35,
-    marginTop:size.size20,
-  },
-  txt: {
-    marginLeft:size.size5,
-    fontSize: size.size14,
-    fontWeight: '400',
-    lineHeight: size.size16,
-    letterSpacing: 0.24,
-    color: '#949494',
-    },
-      viewDesc:{
-      width:size.size314,
-      height:size.size112,
-      marginLeft:size.size30,
-      marginTop:size.size10,
-    }
-})
-
 
 

@@ -10,14 +10,15 @@ export const mainStyle = {
   img: {
     width: size.size263,
     height: size.size241,
+    marginBottom: size.size20
   },
   txt:{
+    fontFamily: 'Montserrat-Bold',
     fontSize: size.size24,
     lineHeight: size.size32,
     fontWeight: '600',
-    Letter: 0.25,
+    Letter: size.size1/4,
     color: '#11493E',
-    //fontFamily: 'Montserrat-Black',
   },
   OTP:{
     backgroundColor:'#347474',justifyContent: "center",
@@ -32,8 +33,35 @@ export const mainStyle = {
   ViewOTP:{
     width:size.size155,
     height:size.size45,
-    //position:'absolute',
-    //right:size.size10,
-    //top:size.size112,
+   },
+  viewButGroup:{
+    flexDirection: 'row',
+    width:size.size340,
+    marginTop:size.size30,
+    marginLeft:size.size10
+  },
+  viewForInput:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  txtForPass:{
+    textAlign: 'right',
+    marginLeft:size.size225,
+    marginTop: size.size15
+  },
+  txtSubmit:{
+    color:'white',
+    fontWeight:'600',
+    fontSize:size.size14,
+    lineHeight:size.size16
+  },
+  viewCode:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  viewGoogle:{
+    flexDirection:'row',
+    marginTop:size.size30
   }
 }

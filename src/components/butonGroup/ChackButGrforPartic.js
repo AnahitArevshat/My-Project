@@ -63,7 +63,7 @@ const styles=StyleSheet.create({
   txt:{
     fontSize:size.size14,
     fontWeight:'500',
-    letterSpacing:0.25,
+    letterSpacing:size.size1/4,
   }
 })
 

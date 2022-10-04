@@ -12,7 +12,7 @@ const Loader=({visible=true})=>{
       <View style={[styles.container, {height, width}]}>
         <View style={styles.loader}>
           <ActivityIndicator size="large" color='5D5FEE'/>
-          <Text style={{marginRight:size.size10, fontSize:size.size16}}>Loading...</Text>
+          <Text style={styles.txt}>Loading...</Text>
         </View>
       </View>
     )
@@ -40,6 +40,10 @@ const styles=StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal:size.size20
   },
+  txt:{
+    marginRight:size.size10,
+    fontSize:size.size16
+  }
 
 })
 

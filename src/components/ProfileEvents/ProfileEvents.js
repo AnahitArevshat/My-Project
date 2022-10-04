@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, FlatList} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import moment from 'moment';
 import size from '../../functions/ratio';
 
@@ -11,16 +11,14 @@ const ProfileEvents=({el, navigation})=>{
       {el.map((item, index)=>(
         <TouchableOpacity key={index} onPress={()=>navigation.navigate('EvenPag', item)}>
           <View style={styles.shad}>
-            <View style={{flexDirection:'row', alignItems:'center', marginBottom:size.size5}}>
-
-              <View style={{width:size.size5, height:size.size111, backgroundColor:item.color,borderColor:'#F4C584', borderBottomLeftRadius:6, borderTopStartRadius:6}}/>
-
+            <View style={styles.viewFirst}>
+              <View style={[styles.viewSecond, {backgroundColor:item.color}]}/>
               <View style={{flex:1}}>
                 <Text style={[styles.txt,{marginLeft:size.size2}]}>{item.type}</Text>
-                <Text style={{textAlign:'justify', fontSize:size.size12, fontWeight:'400', marginTop:size.size10, marginLeft:size.size2, marginRight:size.size7}}>{item.descript}</Text>
-                <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                  <Text style={{ marginTop:size.size12}}>{moment(item.dat).format('MMM DD, YYYY')}| {item.duration}</Text>
-                  <View style={{marginLeft:size.size50, marginTop:size.size12, marginRight:size.size5}}><Text>{item.room}</Text></View>
+                <Text style={styles.txtDesc}>{item.descript}</Text>
+                <View style={styles.viewDur}>
+                  <Text style={styles.txtDur}>{moment(item.dat).format('MMM DD, YYYY')}| {item.duration}</Text>
+                  <View style={styles.viewRoom}><Text>{item.room}</Text></View>
                 </View>
               </View>
 
@@ -50,35 +48,45 @@ const styles=StyleSheet.create({
     borderColor:'gray',
     overflow: 'hidden',
   },
-
+  viewFirst:{
+    flexDirection:'row',
+    alignItems:'center',
+    marginBottom:size.size5
+  },
+  viewSecond:{
+    width:size.size5,
+    height:size.size111,
+    borderColor:'#F4C584',
+    borderBottomLeftRadius:size.size6,
+    borderTopStartRadius:size.size6
+  },
+  viewDur:{
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  viewRoom:{
+    marginLeft:size.size50,
+    marginTop:size.size12,
+    marginRight:size.size5
+  },
   txt:{fontSize:size.size16,
     fontWeight:'600',
     lineHeight:size.size24,
   },
+  txtDesc:{
+    textAlign:'justify',
+    fontSize:size.size12,
+    fontWeight:'400',
+    marginTop:size.size10,
+    marginLeft:size.size2,
+    marginRight:size.size7
+  },
+  txtDur:{
+    marginTop:size.size12
+  }
 
 })
 
-/*<FlatList data={el} keyExtractor={(item, index)=>index} renderItem={({item})=>(
-        <TouchableOpacity onPress={()=>navigation.navigate('EvenPag', item)}>
-          <View style={styles.shad}>
-            <View style={{flexDirection:'row', alignItems:'center', marginBottom:size.size5}}>
-
-              <View style={{width:size.size5, height:size.size111, backgroundColor:item.color,borderColor:'#F4C584', borderBottomLeftRadius:6, borderTopStartRadius:6}}/>
-
-              <View style={{flex:1}}>
-                <Text style={[styles.txt,{marginLeft:size.size2}]}>{item.type}</Text>
-                <Text style={{textAlign:'justify', fontSize:size.size12, fontWeight:'400', marginTop:size.size10, marginLeft:size.size2, marginRight:size.size7}}>{item.descript}</Text>
-                <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-                  <Text style={{ marginTop:size.size12}}>{moment(item.dat).format('MMM DD, YYYY')}| {item.duration}</Text>
-                  <View style={{marginLeft:size.size50, marginTop:size.size12, marginRight:size.size5}}><Text>{item.room}</Text></View>
-                </View>
-              </View>
-
-            </View>
-          </View>
-        </TouchableOpacity>
-      )}
-      />*/
 
 
 

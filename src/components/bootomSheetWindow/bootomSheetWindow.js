@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux";
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useCallback, useMemo, useRef, useState} from "react";
+import {useSelector} from "react-redux";
+import { View, Text, TouchableOpacity } from 'react-native';
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import { Shadow } from 'react-native-shadow-2';
 import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
@@ -14,6 +14,7 @@ import { Calendar } from "react-native-calendars";
 import ButtonGroupForModal from "../butonGroup/buttonGroupeForModal";
 import Greate from '../../assets/greate.svg';
 import size from '../../functions/ratio';
+import {BSWStyle} from '../bootomSheetWindow/styleBSW';
 
 const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
 
@@ -91,18 +92,18 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
         enabledGestureInteraction={true}
       >
         <BottomSheetView>
-        <View style={styles.contentContainer}>
+        <View style={BSWStyle.contentContainer}>
           <TouchableOpacity onPress={handleClosePress}>
-          <Clos style={{marginLeft:size.size330}}/>
+          <Clos style={BSWStyle.closeBut}/>
           </TouchableOpacity>
-            <View style={{width:'100%', height:'80%', alignItems:'center'}}>
-             <Text style={styles.txt}>Choose Event Type</Text>
-              <View  style={styles.contentContainer}>
+            <View style={BSWStyle.viewCET}>
+             <Text style={BSWStyle.txt}>Choose Event Type</Text>
+              <View  style={BSWStyle.contentContainer}>
                 <CheckButtonGroupe
                   buttons={['Meeting', 'Teambuilding', 'Trainings', 'Events']}
                   doSomthingAfterClick={printButtonLable}/>
               </View>
-              <View style={{marginTop:(size.size60*-1)}}>
+              <View style={BSWStyle.butCET}>
                 <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numType)}/>
               </View>
               </View>
@@ -122,19 +123,19 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'80%', alignItems:'center'}}>
-                <Text style={styles.txt}>Orgnizer</Text>
-                <View  style={styles.contentContainer}>
+              <View style={BSWStyle.viewCET}>
+                <Text style={BSWStyle.txt}>Orgnizer</Text>
+                <View  style={BSWStyle.contentContainer}>
                   <CheckButGrForOrgn
                     buttons={['Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname', 'Name Surname']}
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View style={{marginTop:(size.size30*-1)}}>
+                <View style={BSWStyle.butOrgnizer}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numOrgnizer)}/>
                 </View>
               </View>
@@ -154,19 +155,19 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'80%', alignItems:'center'}}>
-                <Text style={styles.txt}>Participators</Text>
-                <View  style={styles.contentContainer}>
+              <View style={BSWStyle.viewCET}>
+                <Text style={BSWStyle.txt}>Participators</Text>
+                <View  style={BSWStyle.contentContainer}>
                   <CheckButGrForPartic
                     buttons={['Frontend team', 'Backend team', 'Mobile team', 'Dezign team', 'Managers', 'Team Leads']}
                     doSomthingAfterClick={printButtonLable}
                    />
                 </View>
-                <View style={{marginTop:(size.size60*-1)}}>
+                <View style={BSWStyle.butCET}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numParticip)}/>
                 </View>
               </View>
@@ -186,18 +187,18 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'70%', alignItems:'center'}}>
-                <Text style={styles.txt}>Choose Room</Text>
-                <View  style={styles.contentContainer}>
+              <View style={BSWStyle.viewCR}>
+                <Text style={BSWStyle.txt}>Choose Room</Text>
+                <View  style={BSWStyle.contentContainer}>
                   <CheckButtonGroupe
                     buttons={['Meeting rooms', 'Meeting room1',]}
                     doSomthingAfterClick={printButtonLable}/>
                 </View>
-                <View style={{marginTop:(size.size60*-1)}}>
+                <View style={BSWStyle.butCET}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numRoom)}/>
                 </View>
               </View>
@@ -217,13 +218,13 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'100%', alignItems:'center'}}>
-                <Text style={[styles.txt, {marginBottom:size.size30}]}>Choose Date</Text>
-                <Shadow style={{width:size.size300, borderRadius:size.size4}}>
+              <View style={BSWStyle.viewDat}>
+                <Text style={[BSWStyle.txt, {marginBottom:size.size30}]}>Choose Date</Text>
+                <Shadow style={BSWStyle.cal}>
                 <Calendar onDayPress={(day) => {setNumEvent({...numEvent, numDate:(day.dateString)})}}
                 />
                 </Shadow>
@@ -247,19 +248,19 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={handleClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'70%', alignItems:'center'}}>
-                <Text style={styles.txt}>Actual duration</Text>
-                <View  style={[styles.contentContainer, {marginTop: size.size20, marginLeft:size.size13}]}>
+              <View style={BSWStyle.viewCR}>
+                <Text style={BSWStyle.txt}>Actual duration</Text>
+                <View  style={BSWStyle.viewButGrModal}>
                   <ButtonGroupForModal
                     buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day', 'Full day']}
                     doSomthingAfterClick={printButtonLable}
                   />
                 </View>
-                <View style={{marginTop:(size.size60*-1)}}>
+                <View style={BSWStyle.butCET}>
                   <Button title='Select'onPress={(el)=>HandleClick(el, numEvent.numDuration)}/>
                 </View>
               </View>
@@ -278,13 +279,13 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
           enabledGestureInteraction={true}
         >
           <BottomSheetView>
-            <View style={styles.contentContainer}>
+            <View style={BSWStyle.contentContainer}>
               <TouchableOpacity onPress={greatClosePress}>
-                <Clos style={{marginLeft:size.size330}}/>
+                <Clos style={BSWStyle.closeBut}/>
               </TouchableOpacity>
-              <View style={{width:'100%', height:'80%', alignItems:'center'}}>
+              <View style={BSWStyle.viewCET}>
                 <Greate style={{marginTop:size.size50}}/>
-                <Text style={[styles.txt, {marginTop:size.size50}]}>Greate!</Text>
+                <Text style={[BSWStyle.txt, {marginTop:size.size50}]}>Greate!</Text>
                 <Text style={{marginTop:size.size50}}>Event successfully created!</Text>
               </View>
             </View>
@@ -295,20 +296,5 @@ const BottomSheetWindow = ({doSomething, ind, mod, setMod, navigation}) => {
     }
 };
 
-const styles = StyleSheet.create({
-  contentContainer: {
-   alignItems: 'center',
-  },
-
-  txt:{
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-    color: '#11493E',
-    },
-
-
-});
 
 export default BottomSheetWindow;

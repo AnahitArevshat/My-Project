@@ -9,7 +9,7 @@ const ButtonForNotif=({title, onPress=()=>{}})=>{
       onPress={onPress}
       style={styles.stybut}
       >
-      <Text style={{color:'white', fontWeight:'600', fontSize:size.size14, lineHeight:size.size16}}>{title}</Text>
+      <Text style={styles.txt}>{title}</Text>
     </TouchableOpacity>)
 }
 export default ButtonForNotif;
@@ -25,5 +25,11 @@ const styles = StyleSheet.create({
     borderRadius: size.size4,
     justifyContent: "center",
     alignItems: "center"
+  },
+  txt:{
+    color:'white',
+    fontWeight:'600',
+    fontSize:size.size14,
+    lineHeight:size.size16
   }
 })

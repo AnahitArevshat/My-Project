@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet, Text, View,ScrollView
-} from 'react-native'
-import {useSelector, useDispatch} from "react-redux";
+import {StyleSheet, Text, View} from 'react-native'
+import {useSelector} from "react-redux";
 import { VictoryArea, VictoryChart, VictoryAxis, VictoryStack} from "victory-native";
 import size from "../../functions/ratio";
 import TaskComp from '../../components/taskComp/taskComp';
@@ -35,13 +33,13 @@ const data = [
   {quarter: 7.5, y: 1, k: 7},
 ];
 
-const HistoryTasks=()=>{
+const HistoryTasks=({navigation})=>{
   const task=useSelector(state=>state.tasks);
 
   return(
     <>
         <View>
-          <Text style={[styles.txtLeft, {marginLeft:size.size130, marginRight: size.size100, marginBottom:(size.size25*-1)}]}>
+          <Text style={styles.txtHisTask}>
             History tasks
           </Text>
         </View>
@@ -105,7 +103,7 @@ const HistoryTasks=()=>{
           </VictoryChart>
         </View>
         <View  style={{alignItems:'center'}}>
-        <TaskComp el={task.tasks}/>
+        <TaskComp el={task.tasks} navigation={navigation}/>
         </View>
        </>
   )
@@ -115,15 +113,16 @@ export default HistoryTasks;
 
 
 const styles = StyleSheet.create({
-
-  txtLeft:{
-    marginRight:size.size250,
+  txtHisTask:{
     marginTop:size.size20,
     fontSize:size.size16,
     fontWeight:'600',
     lineHeight:size.size24,
     letterSpacing:0.24,
-    color:'#1B3131'
+    color:'#1B3131',
+    marginLeft:size.size130,
+    marginRight: size.size100,
+    marginBottom:(size.size25*-1)
   }
 })
 

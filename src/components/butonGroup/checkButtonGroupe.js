@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Text, StyleSheet, TouchableOpacity, View, FlatList, Switch } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, View, FlatList } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 import size from '../../functions/ratio';
 
@@ -51,7 +51,7 @@ const styles=StyleSheet.create({
   txt:{
     fontSize:size.size14,
     fontWeight:'500',
-    letterSpacing:0.25,
+    letterSpacing:size.size1/4,
     marginBottom:size.size20
   }
 })

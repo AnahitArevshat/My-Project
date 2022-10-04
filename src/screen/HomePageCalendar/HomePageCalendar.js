@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { View } from "react-native";
-import {useSelector, useDispatch} from "react-redux";
+import { View, StyleSheet } from "react-native";
+import {useSelector} from "react-redux";
 import {Calendar} from 'react-native-calendars';
-import moment from 'moment';
 
 import size from '../../functions/ratio';
 
 
 const HomePageCalendar=({selectDay, setSelectDay, markedDates, setMarkedDates})=>{
 
-  //const [curDay, setCurDay]=useState(moment(new Date()).format("YYYY-MM-DD"));
   const task=useSelector(state=>state.tasks.tasks);
   const event=useSelector(state => state.events.events);
   const dates=[...task, ...event];
@@ -45,7 +43,7 @@ return(
 
       <View style={{alignItems:'center'}}>
           <Calendar
-          style={{width:size.size315, marginTop:size.size15}}
+          style={styles.cal}
           markingType={'multi-period'}
           onDayPress={(day) => onSelDay(day)}
           markedDates={markedDates}
@@ -65,5 +63,10 @@ return(
 
 export default HomePageCalendar;
 
-
+const styles = StyleSheet.create({
+  cal:{
+    width:size.size315,
+    marginTop:size.size8
+  }
+ })
 

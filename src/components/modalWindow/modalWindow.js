@@ -9,9 +9,11 @@ import CheckButtonGroupe from '../butonGroup/checkButtonGroupe';
 import moment from "moment/moment";
 import Clos from '../../assets/clos.svg';
 import size from '../../functions/ratio';
+import {ModWinStyle} from '../modalWindow/styleModWin';
 
-const ModalWindow=({doSomething, ind})=>{
-  const [mod, setMod]=useState(true);
+
+const ModalWindow=({doSomething, ind, mod, setMod})=>{
+
   const [num, setNum]=useState(0);
   const [num1, setNum1]=useState(0);
   const [num2, setNum2]=useState('');
@@ -40,23 +42,23 @@ const ModalWindow=({doSomething, ind})=>{
 
     <Modal visible={mod}>
       <TouchableOpacity onPress={()=>setMod(false)}>
-        <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
+        <Clos style={ModWinStyle.butClose}/>
       </TouchableOpacity>
-        <View style={styles.contan}>
-        <View style={{width:'100%', height:'30%', alignItems:'center'}}>
-        <View style={{marginTop: size.size10}}>
-      <Text style={styles.txt}>Actual duration</Text>
+        <View style={ModWinStyle.contan}>
+        <View style={ModWinStyle.viewAcDur}>
+        <View style={ModWinStyle.viewDur}>
+      <Text style={ModWinStyle.txt}>Actual duration</Text>
         </View>
-        <View style={{marginTop: size.size20}}>
-          <Text style={styles.txt1}>Select actual duration you spent on this task</Text>
+        <View style={ModWinStyle.viewButGrMod}>
+          <Text style={ModWinStyle.txt1}>Select actual duration you spent on this task</Text>
         </View>
-      <View  style={{marginTop: size.size20}}>
+      <View  style={ModWinStyle.viewButGrMod}>
           <ButtonGroupForModal
             buttons={['15 minute', '30 minute', '2 hours', '1 hours', '3 hours', 'Half day', 'Full day']}
             doSomthingAfterClick={printButtonLable}
           />
       </View>
-      <View style={{marginTop:(size.size70*-1)}}>
+      <View style={ModWinStyle.but}>
         <Button title='Select'onPress={(el)=>HandleClick(el, num)}/>
       </View>
       </View>
@@ -70,14 +72,14 @@ const ModalWindow=({doSomething, ind})=>{
     return(
       <Modal visible={mod}>
         <TouchableOpacity onPress={()=>setMod(false)}>
-          <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
+          <Clos style={ModWinStyle.butClose}/>
         </TouchableOpacity>
-        <View style={styles.contan}>
-          <View style={{width:'100%', height:'50%', alignItems:'center'}}>
+        <View style={ModWinStyle.contan}>
+          <View style={ModWinStyle.viewSelProj}>
         <View>
-          <Text style={styles.txt}>Select Project</Text>
+          <Text style={ModWinStyle.txt}>Select Project</Text>
         </View>
-        <View style={styles.contan}>
+        <View style={ModWinStyle.contan}>
           <CheckButtonGroupe
             buttons={['Project name 01', 'Project name 02', 'Project name 03', 'Project name 04']}
             doSomthingAfterClick={printButtonLable}/>
@@ -94,12 +96,11 @@ if(ind===3) {
   return(
     <Modal visible={mod}>
       <TouchableOpacity onPress={()=>setMod(false)}>
-        <Clos style={{marginTop:size.size20, marginLeft:size.size350}}/>
+        <Clos style={ModWinStyle.butClose}/>
       </TouchableOpacity>
-       <View style={styles.contan}>
-
-           <Text style={[styles.txt, {marginBottom:size.size30}]}>Select Day</Text>
-         <Shadow style={{width:size.size300, borderRadius:size.size4}}>
+       <View style={ModWinStyle.contan}>
+           <Text style={[ModWinStyle.txt, {marginBottom:size.size30}]}>Select Day</Text>
+         <Shadow style={ModWinStyle.shad}>
         <Calendar onDayPress={(day) => {setNum2(day.dateString)}}
         />
          </Shadow>
@@ -112,27 +113,5 @@ if(ind===3) {
   )
 }
 }
-const styles=StyleSheet.create({
-  contan:{
-    flex:1,
-    alignItems:'center',
-    marginTop:size.size30,
-    marginBottom:(size.size200*-1),
-  },
-  txt:{
-    fontSize:size.size16,
-    fontWeight:'600',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-    color: '#11493E',
-  },
-  txt1:{
-    fontSize:size.size14,
-    fontWeight:'500',
-    lineHeight:size.size24,
-    letterSpacing:0.25,
-   }
-
-})
 
 export default ModalWindow;
