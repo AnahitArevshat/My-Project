@@ -81,7 +81,7 @@ const DelUpdTasks=({navigation, route})=>{
   return(
 
         <SafeAreaView style={DelUpdTasksStyle.conteiner}>
-          {mod && <ModalWindow ind={ind} doSomething={doSomething}/>}
+          {mod && <ModalWindow ind={ind} doSomething={doSomething} mod={mod} setMod={setMod}/>}
 
           <View style={DelUpdTasksStyle.viewUT}>
             <Text style={DelUpdTasksStyle.txtUT}>Update Task</Text>

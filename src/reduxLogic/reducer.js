@@ -11,8 +11,8 @@ export const GET_PHOTOS_FAILURE = "GET_PHOTOS_FAILURE";
 
 const photoReducer = (state = initialState, action) => {
   switch (action.type) {
-    /*case GET_PHOTOS:
-      return { ...state, isFetching: true };*/
+    case GET_PHOTOS:
+      return { ...state, isFetching: true };
 
     case GET_PHOTOS_SUCCESS:
       return {

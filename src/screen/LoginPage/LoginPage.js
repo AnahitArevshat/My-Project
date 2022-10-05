@@ -50,13 +50,16 @@ const LoginPage=({navigation})=> {
   }, []);
 
 
+  // This code will be merged later for API use
+  /*
+  const item= useSelector(state => state.photosReducer.photos);
+  const dispatch=useDispatch();
+  console.log(item);
+  const getItem = function() {
+    dispatch(getPhotosAction());
+  };
+  */
 
-  //const task=useSelector(state=>state.tasks);
-
-  //const item= useSelector(state => state.photosReducer.photos);
-
-  //console.log(item);
-  //console.log(task)
 
   GoogleSignin.configure({
     webClientId: '50062395086-7a7j7aa4a544nl2tuggnvf9ugimk4po3.apps.googleusercontent.com',
@@ -125,12 +128,6 @@ const LoginPage=({navigation})=> {
       Alert.alert('Invalid code.');
     }
   }
-
-
-
-  const getItem = function() {
-    dispatch(getPhotosAction());
-  };
 
   const printButtonLable=(value)=>{
     setNumber(value);
@@ -271,7 +268,6 @@ const LoginPage=({navigation})=> {
          </View>
   </View>
         </View>
-
       </SafeAreaView>)
 
    }
